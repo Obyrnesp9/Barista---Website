@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stephen's Barista Training — Business Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#1a1a1a;font-family:'Plus Jakarta Sans',sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 20px;gap:60px;}
+
+  .label{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#555;margin-bottom:16px;text-align:center;}
+  .card-container{display:flex;gap:40px;flex-wrap:wrap;justify-content:center;align-items:center;}
+
+  .card{
+    width:350px;
+    height:200px;
+    border-radius:14px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.03);
+  }
+
+  /* ============ FRONT ============ */
+  .front{
+    background:radial-gradient(ellipse at 35% 40%,rgba(107,66,38,0.12) 0%,transparent 50%),
+              radial-gradient(ellipse at 65% 65%,rgba(200,169,110,0.08) 0%,transparent 40%),
+              #0A0A0A;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:0 36px;
+  }
+
+  .front::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:3px;
+    background:linear-gradient(90deg,transparent,#6B4226,#C8A96E,#D4A574,#6B4226,transparent);
+  }
+
+  .front .icon{
+    font-size:18px;
+    margin-bottom:14px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .front .icon span.dot{
+    width:6px;height:6px;border-radius:50%;
+    background:linear-gradient(135deg,#6B4226,#D4A574);
+  }
+
+  .front .name{
+    font-family:'Libre Baskerville',serif;
+    font-size:22px;
+    color:#FAF5F0;
+    margin-bottom:4px;
+    letter-spacing:-0.3px;
+  }
+  .front .name em{
+    font-style:normal;
+    background:linear-gradient(135deg,#A0704E,#C8A96E);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  .front .title-role{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:9px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:#D4A574;
+    margin-bottom:18px;
+  }
+
+  .front .tagline{
+    font-family:'Playfair Display',serif;
+    font-size:12px;
+    font-style:italic;
+    color:#C8A96E;
+    opacity:0.7;
+  }
+
+  .front .corner{
+    position:absolute;
+    bottom:16px;right:24px;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:8px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:rgba(200,169,110,0.25);
+  }
+
+  /* ============ BACK ============ */
+  .back{
+    background:#0A0A0A;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:20px;
+    padding:28px 30px;
+    align-items:center;
+  }
+
+  .back::before{
+    content:'';
+    position:absolute;
+    bottom:0;left:0;right:0;
+    height:3px;
+    background:linear-gradient(90deg,transparent,#6B4226,#C8A96E,#D4A574,#6B4226,transparent);
+  }
+
+  .back .info{display:flex;flex-direction:column;gap:10px;}
+  .back .info-row{display:flex;align-items:center;gap:10px;}
+  .back .info-icon{
+    width:26px;height:26px;
+    border-radius:6px;
+    background:rgba(107,66,38,0.1);
+    border:1px solid rgba(107,66,38,0.15);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;
+    flex-shrink:0;
+  }
+  .back .info-text{
+    font-size:11px;
+    color:#aaa;
+    line-height:1.3;
+  }
+  .back .info-text strong{
+    color:#D4A574;
+    font-weight:500;
+  }
+
+  .back .qr{
+    width:80px;height:80px;
+    border-radius:10px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.06);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+  }
+  .back .qr-box{
+    width:48px;height:48px;
+    border-radius:6px;
+    background:linear-gradient(135deg,rgba(107,66,38,0.15),rgba(200,169,110,0.08));
+    border:1px solid rgba(107,66,38,0.2);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .back .qr-box svg{width:28px;height:28px;}
+  .back .qr-label{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:7px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#555;
+  }
+
+  .back .cert{
+    position:absolute;
+    top:12px;right:16px;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:7px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:rgba(200,169,110,0.3);
+    display:flex;align-items:center;gap:4px;
+  }
+  .back .cert-dot{
+    width:4px;height:4px;border-radius:50%;
+    background:#D4A574;
+    opacity:0.5;
+  }
+
+  /* Print styles */
+  @media print{
+    body{background:white;padding:20mm;}
+    .label{color:#333;}
+    .card{box-shadow:0 0 0 0.5px #ddd;}
+    .front{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .back{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+
+  /* Print guide */
+  .print-note{
+    text-align:center;
+    color:#444;
+    font-size:11px;
+    font-family:'Space Grotesk',sans-serif;
+    letter-spacing:0.5px;
+    max-width:500px;
+    line-height:1.6;
+  }
+</style>
+</head>
+<body>
+
+<div>
+  <div class="label">Front</div>
+  <div class="card front">
+    <div class="icon">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+    <div class="name">Stephen&rsquo;s <em>Barista Training</em></div>
+    <div class="title-role">Certified Barista Trainer &middot; On-Site Nationwide</div>
+    <div class="tagline">&ldquo;Great coffee starts with great training.&rdquo;</div>
+    <div class="corner">baristatraining.ie</div>
+  </div>
+</div>
+
+<div>
+  <div class="label">Back</div>
+  <div class="card back">
+    <div class="cert"><span class="cert-dot"></span> Certified Trainer</div>
+    <div class="info">
+      <div class="info-row">
+        <div class="info-icon">&#128100;</div>
+        <div class="info-text"><strong>Stephen O&rsquo;Byrne</strong></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">&#128222;</div>
+        <div class="info-text">087 170 7846</div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">&#9993;</div>
+        <div class="info-text">info@baristatraining.ie</div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">&#127760;</div>
+        <div class="info-text">baristatraining.ie</div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">&#128205;</div>
+        <div class="info-text">Waterford, Ireland</div>
+      </div>
+    </div>
+    <div class="qr">
+      <div class="qr-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(200,169,110,0.5)" stroke-width="1.5">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+          <rect x="15" y="15" width="2" height="2"/>
+          <rect x="19" y="15" width="2" height="2"/>
+          <rect x="15" y="19" width="2" height="2"/>
+          <rect x="19" y="19" width="2" height="2"/>
+          <rect x="5" y="5" width="3" height="3" fill="rgba(200,169,110,0.3)"/>
+          <rect x="16" y="5" width="3" height="3" fill="rgba(200,169,110,0.3)"/>
+          <rect x="5" y="16" width="3" height="3" fill="rgba(200,169,110,0.3)"/>
+        </svg>
+      </div>
+      <div class="qr-label">Scan Me</div>
+    </div>
+  </div>
+</div>
+
+<p class="print-note">
+  Standard business card size: 85mm &times; 55mm (3.5&Prime; &times; 2&Prime;)<br>
+  Print with bleed: 91mm &times; 61mm &middot; CMYK recommended<br>
+  <span style="color:#666;font-size:10px">Replace QR placeholder with actual QR code linking to baristatraining.ie</span>
+</p>
+
+</body>
+</html>

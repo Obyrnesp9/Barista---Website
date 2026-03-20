@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stephen's Barista Training — Reference Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --slate: #2D2D2D;
+    --sage: #5B7B6A;
+    --mint: #8AAE97;
+    --gold: #C8A96E;
+    --stone: #F2F0EB;
+    --bg: #0A0A0A;
+    --text: #F2F0EB;
+    --text-dim: #999;
+    --text-mid: #bbb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @media print {
+    .page { page-break-after: always; }
+    .page:last-child { page-break-after: avoid; }
+    body { background: white; }
+  }
+
+  body {
+    font-family: 'Sora', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── COVER PAGE ── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 40px;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 700px; height: 700px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(91,123,106,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .cover-border {
+    position: absolute;
+    inset: 28px;
+    border: 1px solid rgba(138,174,151,0.12);
+    pointer-events: none;
+  }
+
+  .cover-border::before, .cover-border::after {
+    content: '';
+    position: absolute;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(138,174,151,0.2);
+  }
+  .cover-border::before { top: -3px; left: -3px; }
+  .cover-border::after { bottom: -3px; right: -3px; }
+
+  .cover-logo svg {
+    width: 200px;
+    height: auto;
+    margin-bottom: 40px;
+    opacity: 0.9;
+  }
+
+  .cover-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 16px;
+  }
+
+  .cover h1 {
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    color: var(--stone);
+    margin-bottom: 12px;
+  }
+
+  .cover h1 span {
+    color: var(--mint);
+    display: block;
+  }
+
+  .cover-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--mint);
+    opacity: 0.3;
+    margin: 28px auto;
+  }
+
+  .cover-tagline {
+    font-size: 16px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+
+  .cover-sub {
+    font-size: 13px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+
+  .cover-footer {
+    position: absolute;
+    bottom: 48px;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── GLOBAL PAGE LAYOUT ── */
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 60px;
+    position: relative;
+  }
+
+  .page + .page {
+    border-top: 1px solid rgba(138,174,151,0.08);
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 10px;
+  }
+
+  .section-number {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: rgba(138,174,151,0.08);
+    line-height: 1;
+    margin-bottom: -20px;
+    position: relative;
+    z-index: 0;
+  }
+
+  h2 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--stone);
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--stone);
+    margin: 36px 0 14px 0;
+  }
+
+  h3 .accent {
+    color: var(--mint);
+  }
+
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--mint);
+    margin: 24px 0 8px 0;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    font-size: 15px;
+    color: var(--text-mid);
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  /* ── INTRO BLOCK (mission, objectives) ── */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 32px;
+  }
+
+  .intro-card {
+    background: rgba(45,45,45,0.4);
+    border: 1px solid rgba(138,174,151,0.1);
+    padding: 32px;
+    border-radius: 2px;
+  }
+
+  .intro-card h4 {
+    margin-top: 0;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .intro-card p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 0;
+  }
+
+  .objective-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .objective-list li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 10px;
+    font-weight: 300;
+  }
+
+  .objective-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--mint);
+    opacity: 0.5;
+  }
+
+  /* ── DATA CARDS / SPECS ── */
+  .spec-row {
+    display: flex;
+    gap: 24px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+
+  .spec-card {
+    flex: 1;
+    min-width: 220px;
+    background: rgba(45,45,45,0.3);
+    border: 1px solid rgba(138,174,151,0.1);
+    padding: 28px;
+    text-align: center;
+  }
+
+  .spec-card .spec-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .spec-card .spec-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    color: var(--stone);
+    line-height: 1.8;
+    font-weight: 400;
+  }
+
+  .spec-card .spec-value span {
+    color: var(--mint);
+    font-weight: 600;
+  }
+
+  /* ── STEP LISTS ── */
+  .steps {
+    list-style: none;
+    padding: 0;
+    counter-reset: step;
+  }
+
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(138,174,151,0.06);
+  }
+
+  .steps li:last-child { border-bottom: none; }
+
+  .steps li::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: rgba(138,174,151,0.15);
+    min-width: 50px;
+    line-height: 1.2;
+  }
+
+  .step-content {
+    flex: 1;
+  }
+
+  .step-content strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--stone);
+    margin-bottom: 4px;
+  }
+
+  .step-content p {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  /* ── COMPARISON TABLE ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+  }
+
+  .compare-table th {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: left;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(138,174,151,0.15);
+    background: rgba(45,45,45,0.4);
+  }
+
+  .compare-table td {
+    font-size: 14px;
+    color: var(--text-mid);
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(138,174,151,0.06);
+    font-weight: 300;
+  }
+
+  .compare-table td:first-child {
+    color: var(--stone);
+    font-weight: 400;
+  }
+
+  /* ── CALLOUT BOX ── */
+  .callout {
+    background: rgba(91,123,106,0.08);
+    border-left: 3px solid var(--mint);
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+
+  .callout.warning {
+    border-left-color: var(--gold);
+    background: rgba(200,169,110,0.06);
+  }
+
+  .callout.danger {
+    border-left-color: #c85a5a;
+    background: rgba(200,90,90,0.06);
+  }
+
+  .callout-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 8px;
+  }
+
+  .callout.warning .callout-title { color: var(--gold); }
+  .callout.danger .callout-title { color: #c85a5a; }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  /* ── TASTE NOTES COLUMNS ── */
+  .taste-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin: 24px 0;
+  }
+
+  .taste-col h4 {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(138,174,151,0.12);
+    margin-bottom: 14px;
+  }
+
+  .taste-col .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    padding: 5px 14px;
+    border: 1px solid rgba(138,174,151,0.15);
+    color: var(--text-mid);
+    border-radius: 1px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── DRINKS GRID ── */
+  .drinks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 32px 0;
+  }
+
+  .drink-card {
+    background: rgba(45,45,45,0.3);
+    border: 1px solid rgba(138,174,151,0.1);
+    padding: 28px 20px;
+    text-align: center;
+  }
+
+  .drink-card .drink-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .drink-visual {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 16px;
+    position: relative;
+  }
+
+  .drink-card .drink-detail {
+    font-size: 13px;
+    color: var(--text-mid);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── TROUBLESHOOTING ── */
+  .troubleshoot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 24px 0;
+  }
+
+  .troubleshoot-card {
+    background: rgba(45,45,45,0.3);
+    border: 1px solid rgba(138,174,151,0.1);
+    padding: 24px;
+  }
+
+  .troubleshoot-card .ts-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .troubleshoot-card.under .ts-label { color: #c85a5a; }
+  .troubleshoot-card.over .ts-label { color: var(--gold); }
+
+  .troubleshoot-card .ts-fix {
+    font-size: 14px;
+    color: var(--stone);
+    font-weight: 400;
+    line-height: 1.8;
+  }
+
+  .troubleshoot-card .ts-fix span {
+    color: var(--mint);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+
+  .checklist li {
+    position: relative;
+    padding: 10px 0 10px 32px;
+    font-size: 14px;
+    color: var(--text-mid);
+    border-bottom: 1px solid rgba(138,174,151,0.06);
+    font-weight: 300;
+  }
+
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid rgba(138,174,151,0.3);
+    border-radius: 2px;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(138,174,151,0.1);
+  }
+
+  .divider .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--mint);
+    opacity: 0.3;
+  }
+
+  /* ── BACK COVER ── */
+  .back-cover {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px;
+  }
+
+  .back-cover .bc-line {
+    width: 50px;
+    height: 1px;
+    background: var(--mint);
+    opacity: 0.3;
+    margin-bottom: 32px;
+  }
+
+  .back-cover h3 {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--stone);
+    margin-bottom: 8px;
+  }
+
+  .back-cover .bc-title {
+    font-size: 13px;
+    color: var(--mint);
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .back-cover .bc-contact {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 2;
+  }
+
+  .back-cover .bc-contact a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .page { padding: 48px 24px; }
+    .cover h1 { font-size: 36px; }
+    h2 { font-size: 28px; }
+    .intro-grid, .taste-grid, .troubleshoot-grid { grid-template-columns: 1fr; }
+    .drinks-grid { grid-template-columns: repeat(2, 1fr); }
+    .spec-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- COVER PAGE -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="cover page">
+  <div class="cover-border"></div>
+
+  <div class="cover-logo">
+    <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="160" r="98" fill="none" stroke="#8AAE97" stroke-width="2.5"/>
+      <circle cx="200" cy="160" r="91" fill="none" stroke="#8AAE97" stroke-width="1" opacity="0.25"/>
+      <path d="M 165 128 L 160 167 Q 160 178 172 179 L 228 179 Q 240 178 240 167 L 235 128 Z" fill="#8AAE97" opacity="0.08"/>
+      <path d="M 165 128 L 160 167 Q 160 178 172 179 L 228 179 Q 240 178 240 167 L 235 128 Z" fill="none" stroke="#8AAE97" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="200" cy="180" rx="50" ry="11" fill="none" stroke="#8AAE97" stroke-width="2"/>
+      <path d="M 240 140 Q 262 145 262 160 Q 262 172 244 174" fill="none" stroke="#8AAE97" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 190 118 Q 185 108 188 96 Q 191 86 198 92" fill="none" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M 200 114 Q 195 102 198 90 Q 201 80 208 86" fill="none" stroke="#C8A96E" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M 210 118 Q 215 108 212 96 Q 209 86 202 92" fill="none" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="200" cy="222" r="3" fill="#8AAE97"/>
+      <text x="200" y="258" font-family="'Sora', sans-serif" font-size="20" font-weight="700" letter-spacing="1" fill="#F2F0EB" text-anchor="middle">STEPHEN'S</text>
+      <text x="200" y="282" font-family="'Sora', sans-serif" font-size="13" font-weight="500" letter-spacing="3" fill="#8AAE97" text-anchor="middle">BARISTA TRAINING</text>
+    </svg>
+  </div>
+
+  <div class="cover-label">Reference Guide</div>
+  <h1>The Barista's<span>Handbook</span></h1>
+  <div class="cover-divider"></div>
+  <div class="cover-tagline">Great equipment does not guarantee great coffee.</div>
+  <div class="cover-sub">Certified on-site training — Waterford, Ireland</div>
+
+  <div class="cover-footer">
+    stephen@baristatraining.ie &nbsp;·&nbsp; 087-170-7846 &nbsp;·&nbsp; SCA Qualified
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 01 — MISSION & OBJECTIVES -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="page">
+  <div class="section-number">01</div>
+  <div class="section-label">Introduction</div>
+  <h2>Mission &amp; Objectives</h2>
+
+  <p>To gain basic knowledge and skills to perform in a coffee setting and to produce drinks within industry standards. This guide is your daily reference — designed to stay behind the counter and support consistent, high-quality results.</p>
+
+  <div class="intro-grid">
+    <div class="intro-card">
+      <h4>Training Objectives</h4>
+      <ul class="objective-list">
+        <li>Gain a working knowledge of coffee history, main species, varieties, and the impact of processing, storing, and roasting on quality.</li>
+        <li>Identify and use the main parts of an espresso machine, grinder, and accessories to produce industry-standard drinks.</li>
+        <li>Produce espresso as per industry standard.</li>
+        <li>Produce latte, cappuccino, and other main drinks as per industry standard.</li>
+        <li>Develop good barista skills, including hygiene awareness, cleaning, and organising.</li>
+      </ul>
+    </div>
+    <div class="intro-card">
+      <h4>What You'll Cover</h4>
+      <ul class="objective-list">
+        <li>Coffee origins, species, and the coffee belt</li>
+        <li>Processing methods — natural, washed, pulped natural</li>
+        <li>Roasting and storage fundamentals</li>
+        <li>Espresso technique — step by step</li>
+        <li>Grinder calibration and troubleshooting</li>
+        <li>Milk steaming and drink preparation</li>
+        <li>Workspace hygiene, cleaning, and safety</li>
+        <li>Customer service essentials</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 02 — HISTORY OF COFFEE -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="page">
+  <div class="section-number">02</div>
+  <div class="section-label">Origins</div>
+  <h2>History of Coffee</h2>
+
+  <h3>Discovered <span class="accent">9th – 11th Century</span></h3>
+  <p>Coffee was discovered in the south-western part of Ethiopia around the 10th century. From these ancient origins, coffee has become one of the most traded commodities in the world.</p>
+
+  <div class="callout">
+    <div class="callout-title">The Legend of Kaldi</div>
+    <p>According to legend, Kaldi was the Ethiopian goat herder who discovered the coffee plant. Kaldi noticed that his herd of goats became very energetic and restless after eating the red berries from a certain bush. This prompted him to try the berries for himself, but when Kaldi took them to Islamic Sufi monks at a monastery, they disapproved and threw them into the fire. However, the aroma that emerged from the fire was so enticing that the roasted beans were taken from the embers and dissolved in hot water. That was the first cup of coffee.</p>
+  </div>
+
+  <div class="divider"><span class="dot"></span></div>
+
+  <h3>The Coffee Belt</h3>
+  <p>Coffee grows between the tropics. It needs constant temperature and humidity to grow — conditions that exist in tropical areas. Coffee grows in Central and South America, Africa, Asia, and the northern part of Australia. The main coffee-growing countries are Brazil, Vietnam, and Colombia.</p>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 03 — ARABICA VS ROBUSTA -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="page">
+  <div class="section-number">03</div>
+  <div class="section-label">Coffee Species</div>
+  <h2>Arabica vs Robusta</h2>
+
+  <p>There are currently 130 species of coffee classified. Only two are commonly cultivated: Arabica and Robusta.</p>
+
+  <div class="spec-row">
+    <div class="spec-card">
+      <div class="spec-title">Arabica</div>
+      <div class="spec-value">
+        <span>800 – 2,200</span> m.a.s.l.<br>
+        <span>0.8 – 1.4%</span> caffeine<br>
+        Sweet, acidic, fruity<br>
+        ~60% of world production
+      </div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-title">Robusta</div>
+      <div class="spec-value">
+        <span>0 – 800</span> m.a.s.l.<br>
+        <span>1 – 4%</span> caffeine<br>
+        Bitter, nutty, woody<br>
+        ~40% of world production
+      </div>
+    </div>
+  </div>
+
+  <p>Robusta grows at low altitudes. It develops a lot of caffeine to protect itself from predators like bugs or fungi, but this also gives a lot of bitterness. Arabica grows at high altitudes where there are fewer predators, making it a safer environment. It is more acidic than Robusta and has less body, but is less bitter because it has less caffeine.</p>
+
+  <h3>Taste Notes</h3>
+  <div class="taste-grid">
+    <div class="taste-col">
+      <h4>Arabica</h4>
+      <div class="tag-list">
+        <span class="tag">Fruity</span>
+        <span class="tag">Floral</span>
+        <span class="tag">Berry</span>
+        <span class="tag">Nutty</span>
+        <span class="tag">Chocolate</span>
+        <span class="tag">Dried fruits</span>
+        <span class="tag">Toffee</span>
+        <span class="tag">More acidic</span>
+      </div>
+    </div>
+    <div class="taste-col">
+      <h4>Robusta</h4>
+      <div class="tag-list">
+        <span class="tag">Nutty</span>
+        <span class="tag">Seedy</span>
+        <span class="tag">Toasty</span>
+        <span class="tag">Earthy</span>
+        <span class="tag">Rubbery</span>
+        <span class="tag">Chocolatey</span>
+        <span class="tag">Woody</span>
+        <span class="tag">More bitter</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 04 — THE COFFEE PLANT & PROCESSING -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="page">
+  <div class="section-number">04</div>
+  <div class="section-label">From Farm to Cup</div>
+  <h2>The Coffee Plant &amp; Processing</h2>
+
+  <h3>The Coffee Plant</h3>
+  <p>The coffee plant is part of the Rubiaceae family. It is an evergreen shrub that produces red fruits. The fruits are very sweet and can be attacked by some bugs called Broca.</p>
+
+  <h3>The Coffee Fruit</h3>
+  <p>Under a thick skin (exocarp) there is a thin layer of fruit pulp (mesocarp). Underneath the fruit pulp there is a thick, white protective layer called parchment (endocarp) and the seed (endosperm).</p>
+
+  <div class="divider"><span class="dot"></span></div>
+
+  <h3>Processing Methods</h3>
+
+  <h4>The Natural Process</h4>
+  <p>The cherries are left to dry in the sunlight for several days until they reach a moisture content of 10–12%. The farmer will rotate them to ensure even drying and prevent mould formation. This process is very popular in countries like Brazil, Yemen, and Ethiopia — producing coffees with high sweetness, low acidity, high body, and fruity flavours.</p>
+
+  <h4>The Washed Process</h4>
+  <p>In countries where water is plentiful, the cherries are passed through a pulping machine, sorted by weight, and deposited in a fermentation tank. Naturally occurring enzymes dissolve the pulp until it can be washed from the bean — a process that takes 12 to 72 hours depending on temperature and humidity. Once fermented, the washed coffee is spread out to dry until it reaches around 10–12% moisture content.</p>
+
+  <h4>The Pulped Natural Process</h4>
+  <p>A depulper removes the skin and pulp from the coffee cherry, and the seeds are dried while mucilage is still covering the parchment. The cup results generally show more cleanliness and uniformity than the conventional natural process. The sugar-rich mucilage naturally increases sweetness and fruitiness.</p>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 05 — ROASTING & STORAGE -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="page">
+  <div class="section-number">05</div>
+  <div class="section-label">Freshness</div>
+  <h2>Roasting &amp; Storage</h2>
+
+  <h3>Coffee Roasting</h3>
+  <p>Coffee is roasted to develop its specific flavour. The roast level significantly impacts the taste profile of the final cup.</p>
+
+  <div class="spec-row">
+    <div class="spec-card">
+      <div class="spec-title">Light Roast</div>
+      <div class="spec-value">
+        More acidic<br>
+        Suitable for <span>filter coffee</span>
+      </div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-title">Medium Roast</div>
+      <div class="spec-value">
+        Sweet and balanced<br>
+        Suitable for <span>filter &amp; espresso</span>
+      </div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-title">Dark Roast</div>
+      <div class="spec-value">
+        Heavy body, more bitter<br>
+        Suitable for <span>espresso</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>Coffee Storage</h3>
+
+  <div class="callout warning">
+    <div class="callout-title">Storage Rules</div>
+    <p>Coffee should be stored in a cool, dry space, away from oxygen, in an airtight container fitted with a one-way valve, away from strong odours, light, and humidity.</p>
+  </div>
+
+  <div class="spec-row">
+    <div class="spec-card">
+      <div class="spec-title">Use Within</div>
+      <div class="spec-value">
+        <span>3 months</span> from roasting<br>
+        <span>3 minutes</span> from grinding
+      </div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-title">Freshness Factors</div>
+      <div class="spec-value">
+        Roaster fresh → Weak aroma →<br>Slightly stale → Stale → Very stale
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 06 — WORKSPACE & EQUIPMENT -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="page">
+  <div class="section-number">06</div>
+  <div class="section-label">Your Station</div>
+  <h2>Workspace &amp; Equipment</h2>
+
+  <h3>Organising the Workspace</h3>
+
+  <div class="callout">
+    <div class="callout-title">Golden Rule</div>
+    <p>Always clean as you go. A clean workspace ensures customer confidence, professional appearance, improved workflow, accident prevention, minimised waste, and prevents cross-contamination.</p>
+  </div>
+
+  <h3>Espresso Machine — Key Components</h3>
+  <div class="compare-table-wrapper">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Function</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Steam Wand</td><td>Steams and froths milk for drinks</td></tr>
+        <tr><td>Steam Knob</td><td>Controls steam flow to the wand</td></tr>
+        <tr><td>Pressure Gauge</td><td>7–11 bars for grouphead, 1–1.5 bars for steam wand</td></tr>
+        <tr><td>Grouphead</td><td>Houses the showerscreen — where water meets coffee</td></tr>
+        <tr><td>Drip Tray</td><td>Catches excess water and drips</td></tr>
+        <tr><td>Extraction Buttons</td><td>Start and stop the extraction process</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Essential Utensils</h3>
+  <div class="compare-table-wrapper">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Utensil</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Portafilter</td><td>Holds the basket and coffee grounds during extraction</td></tr>
+        <tr><td>Double Basket</td><td>Standard basket for a double shot (14–20g)</td></tr>
+        <tr><td>Single Basket</td><td>For single shots (7–10g)</td></tr>
+        <tr><td>Blind Basket</td><td>Solid basket used for backflushing/cleaning</td></tr>
+        <tr><td>Tamper</td><td>Compresses ground coffee into a flat, even bed</td></tr>
+        <tr><td>Tamping Mat</td><td>Protects the counter during tamping</td></tr>
+        <tr><td>Knock Box</td><td>Receptacle for used coffee pucks</td></tr>
+        <tr><td>Shot Glass</td><td>Measures espresso volume during extraction</td></tr>
+        <tr><td>Timer</td><td>Tracks extraction time for consistency</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Types of Grinders</h3>
+  <div class="spec-row">
+    <div class="spec-card">
+      <div class="spec-title">Dozing Chamber Grinder</div>
+      <div class="spec-value">
+        Bean hopper, dial-in collar,<br>
+        dozing chamber, paddle,<br>
+        portafilter fork
+      </div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-title">Grind-on-Demand (GOD)</div>
+      <div class="spec-value">
+        Always delivers <span>freshly ground</span> coffee.<br>
+        More consistent, less waste.<br>
+        Dosing buttons, exit chute.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 07 — ESPRESSO TECHNIQUE -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="page">
+  <div class="section-number">07</div>
+  <div class="section-label">Core Technique</div>
+  <h2>Espresso</h2>
+
+  <p>Espresso is a method of coffee extraction that takes finely ground coffee, compacts it into a portafilter, and forces hot water through it under pressure to make a concentrated coffee beverage.</p>
+
+  <div class="spec-row">
+    <div class="spec-card">
+      <div class="spec-title">Dose</div>
+      <div class="spec-value"><span>7–10g</span> single / <span>14–20g</span> double</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-title">Yield</div>
+      <div class="spec-value"><span>25–35ml</span> single / <span>50–60ml</span> double</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-title">Shot Time</div>
+      <div class="spec-value"><span>20–30 seconds</span><br>(sometimes 25–35 seconds)</div>
+    </div>
+  </div>
+
+  <div class="divider"><span class="dot"></span></div>
+
+  <h3>Step-by-Step Technique</h3>
+  <ol class="steps">
+    <li><div class="step-content"><strong>Remove portafilter from grouphead and flush group</strong><p>Clear any old coffee residue and heat the grouphead with fresh water.</p></div></li>
+    <li><div class="step-content"><strong>Wipe basket clean and dry</strong><p>Ensure the basket is free from moisture and leftover grounds.</p></div></li>
+    <li><div class="step-content"><strong>Dose and distribute the desired grams of coffee</strong><p>Use your grinder to dose the correct weight into the basket. Distribute evenly.</p></div></li>
+    <li><div class="step-content"><strong>Tamp consistently, flat &amp; ergonomically</strong><p>Apply firm, level pressure to create a uniform coffee bed. Keep your wrist straight.</p></div></li>
+    <li><div class="step-content"><strong>Clean loose grounds from portafilter surfaces</strong><p>Wipe the rim and spouts clean to ensure a proper seal in the grouphead.</p></div></li>
+    <li><div class="step-content"><strong>Insert portafilter and start the pump immediately</strong><p>Lock in and engage the pump in one continuous motion to avoid burning the puck.</p></div></li>
+    <li><div class="step-content"><strong>Observe the flow and stop pump appropriately</strong><p>Watch the stream colour and consistency. Stop when you reach your target yield.</p></div></li>
+    <li><div class="step-content"><strong>Serve or use to make espresso-based drinks</strong><p>Present your drinks with care — first impressions matter.</p></div></li>
+    <li><div class="step-content"><strong>Remove portafilter and knock out spent grounds</strong><p>Tap the puck into the knock box cleanly.</p></div></li>
+    <li><div class="step-content"><strong>Wipe basket clean and flush group</strong><p>Keep everything fresh for the next extraction.</p></div></li>
+    <li><div class="step-content"><strong>Return portafilter to group head to keep preheated</strong><p>A warm portafilter ensures better thermal stability for your next shot.</p></div></li>
+  </ol>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 08 — ESPRESSO QUALITY & TROUBLESHOOTING -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="page">
+  <div class="section-number">08</div>
+  <div class="section-label">Quality Control</div>
+  <h2>Extraction &amp; Troubleshooting</h2>
+
+  <p>A well-extracted espresso presents aromas of chocolate or nuts and flavours of citrus fruits, stone fruits, black tea, or vanilla. It will always have a perfect balance of sweetness, acidity, and bitterness.</p>
+
+  <div class="spec-row">
+    <div class="spec-card">
+      <div class="spec-title">Under-Extracted</div>
+      <div class="spec-value">
+        Sour, astringent<br>
+        Very long, <span>unpleasant</span> finish<br>
+        Pale, thin crema
+      </div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-title">Ideal</div>
+      <div class="spec-value">
+        Balanced acidity, sweetness<br>
+        Round body, <span>smooth</span> finish<br>
+        Golden-brown crema
+      </div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-title">Over-Extracted</div>
+      <div class="spec-value">
+        Bitter, watery, dry<br>
+        Short, <span>harsh</span> finish<br>
+        Dark, burnt crema
+      </div>
+    </div>
+  </div>
+
+  <h3>Channeling</h3>
+  <p>If coffee is not distributed properly in the portafilter, channeling will appear. Channeling is caused by water flowing unevenly through and around the coffee bed. Any shock applied to the portafilter will create cracks in the coffee bed. Proper distribution, tamping technique, and careful insertion into the grouphead are the main factors in avoiding channeling.</p>
+
+  <div class="divider"><span class="dot"></span></div>
+
+  <h3>Grinder Troubleshooting</h3>
+
+  <div class="troubleshoot-grid">
+    <div class="troubleshoot-card under">
+      <div class="ts-label">Tastes: Too Weak, Sour, Salty, Acidic</div>
+      <div class="ts-fix">
+        Brew time too quick →<br><span>USE A FINER GRIND</span><br>
+        or increase brew time
+      </div>
+    </div>
+    <div class="troubleshoot-card over">
+      <div class="ts-label">Tastes: Too Strong, Bitter, Dark</div>
+      <div class="ts-fix">
+        Brew time too long →<br><span>USE A COARSER GRIND</span><br>
+        or decrease brew time
+      </div>
+    </div>
+  </div>
+
+  <h3>Grinder Calibration</h3>
+  <p>Think of it like pouring water through rocks versus sand. When you grind coarse, the extraction time is short because water travels fast through the larger gaps. When you grind fine, the extraction time is longer because the gaps are smaller.</p>
+
+  <div class="callout">
+    <div class="callout-title">Remember</div>
+    <p>When adjusting the grinder, always purge for 2–3 seconds to remove the coffee between the blades before pulling your next shot. Coarser grind = shorter extraction. Finer grind = longer extraction.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 09 — MILK STEAMING -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="page">
+  <div class="section-number">09</div>
+  <div class="section-label">Milk Technique</div>
+  <h2>Milk Steaming</h2>
+
+  <div class="callout">
+    <div class="callout-title">Key Facts</div>
+    <p>Always use fresh, cold milk. Pasteurised milk has a shelf life of 8–12 days. Before steaming, milk should be at 3–5°C. The ideal steamed milk temperature is 55–65°C. Never steam above 70°C — the sugars will burn and the protein chains will break.</p>
+  </div>
+
+  <h3>Step-by-Step Milk Steaming</h3>
+  <ol class="steps">
+    <li><div class="step-content"><strong>Purge the steam wand</strong><p>Excess condensation can build up in the steam wand. Place a cloth over the end and turn it on for a few seconds to clear it.</p></div></li>
+    <li><div class="step-content"><strong>Position the steam wand in the jug</strong><p>Fill the jug just under halfway with fresh cold milk. Sit the steam wand directly down the spout with the tip just below the surface, about 0.5cm deep, shifted halfway between the centre and the side.</p></div></li>
+    <li><div class="step-content"><strong>Stretch the milk</strong><p>Introduce air into the milk to create foam. The closer the tip of the steam wand is to the surface, the more foam the milk will have.</p></div></li>
+    <li><div class="step-content"><strong>Work the milk</strong><p>Once you have enough foam, submerge the tip of the steam wand into the milk to stop additional air entering. The whirlpool will cause all the bigger bubbles to be sucked into its vortex and create micro-foam.</p></div></li>
+    <li><div class="step-content"><strong>Heat up the milk</strong><p>Once the jug becomes too hot to touch it will be around 60°C — time to turn the steam wand off. At 70°C, milk proteins start denaturing, removing natural sweetness and giving a burnt taste.</p></div></li>
+    <li><div class="step-content"><strong>Wipe clean the steam wand and purge</strong><p>Wipe all residual milk off the steam wand and purge immediately. If left uncleaned, milk can sit inside and dry in the tip.</p></div></li>
+    <li><div class="step-content"><strong>Polish the milk</strong><p>Tap the pitcher on a hard surface and swirl several times until all the bubbles are gone and there is only microfoam. Mix the milk and foam together to pour both at the same time.</p></div></li>
+    <li><div class="step-content"><strong>Pour the milk</strong><p>Pour the milk into the cup. Always present your drinks with a nice latte art pattern on top. First impression matters a lot.</p></div></li>
+  </ol>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 10 — MAIN DRINKS -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="page">
+  <div class="section-number">10</div>
+  <div class="section-label">Drink Menu</div>
+  <h2>Main Drinks</h2>
+
+  <div class="drinks-grid">
+    <div class="drink-card">
+      <div class="drink-name">Americano</div>
+      <div class="drink-visual">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="15" width="60" height="55" rx="3" fill="none" stroke="#8AAE97" stroke-width="1.5" opacity="0.4"/>
+          <rect x="12" y="17" width="56" height="25" rx="2" fill="rgba(138,174,151,0.15)"/>
+          <rect x="12" y="42" width="56" height="26" rx="2" fill="rgba(91,123,106,0.3)"/>
+        </svg>
+      </div>
+      <div class="drink-detail">60ml espresso<br>180ml hot water</div>
+    </div>
+
+    <div class="drink-card">
+      <div class="drink-name">Latte</div>
+      <div class="drink-visual">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="15" width="60" height="55" rx="3" fill="none" stroke="#8AAE97" stroke-width="1.5" opacity="0.4"/>
+          <rect x="12" y="17" width="56" height="40" rx="2" fill="rgba(200,169,110,0.15)"/>
+          <rect x="12" y="57" width="56" height="11" rx="2" fill="rgba(91,123,106,0.3)"/>
+        </svg>
+      </div>
+      <div class="drink-detail">60ml espresso<br>300ml steamed milk</div>
+    </div>
+
+    <div class="drink-card">
+      <div class="drink-name">Cappuccino</div>
+      <div class="drink-visual">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="15" width="60" height="55" rx="3" fill="none" stroke="#8AAE97" stroke-width="1.5" opacity="0.4"/>
+          <rect x="12" y="17" width="56" height="18" rx="2" fill="rgba(242,240,235,0.15)"/>
+          <rect x="12" y="35" width="56" height="18" rx="2" fill="rgba(200,169,110,0.15)"/>
+          <rect x="12" y="53" width="56" height="15" rx="2" fill="rgba(91,123,106,0.3)"/>
+        </svg>
+      </div>
+      <div class="drink-detail">60ml espresso<br>60ml milk / 60ml foam</div>
+    </div>
+
+    <div class="drink-card">
+      <div class="drink-name">Flat White</div>
+      <div class="drink-visual">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="15" width="60" height="55" rx="3" fill="none" stroke="#8AAE97" stroke-width="1.5" opacity="0.4"/>
+          <rect x="12" y="17" width="56" height="32" rx="2" fill="rgba(200,169,110,0.15)"/>
+          <rect x="12" y="49" width="56" height="19" rx="2" fill="rgba(91,123,106,0.3)"/>
+        </svg>
+      </div>
+      <div class="drink-detail">60ml espresso<br>120ml steamed milk</div>
+    </div>
+
+    <div class="drink-card">
+      <div class="drink-name">Cortado</div>
+      <div class="drink-visual">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="15" y="25" width="50" height="42" rx="3" fill="none" stroke="#8AAE97" stroke-width="1.5" opacity="0.4"/>
+          <rect x="17" y="27" width="46" height="19" rx="2" fill="rgba(200,169,110,0.15)"/>
+          <rect x="17" y="46" width="46" height="19" rx="2" fill="rgba(91,123,106,0.3)"/>
+        </svg>
+      </div>
+      <div class="drink-detail">60ml espresso<br>60ml steamed milk</div>
+    </div>
+
+    <div class="drink-card">
+      <div class="drink-name">Espresso</div>
+      <div class="drink-visual">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="35" width="40" height="32" rx="3" fill="none" stroke="#8AAE97" stroke-width="1.5" opacity="0.4"/>
+          <rect x="22" y="37" width="36" height="28" rx="2" fill="rgba(91,123,106,0.3)"/>
+        </svg>
+      </div>
+      <div class="drink-detail">30ml espresso</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 11 — SAFETY & HYGIENE -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="page">
+  <div class="section-number">11</div>
+  <div class="section-label">Standards</div>
+  <h2>Safety, Hygiene &amp; Service</h2>
+
+  <div class="callout danger">
+    <div class="callout-title">Critical Safety</div>
+    <p>Never touch the steam wand by its metal part — this can cause severe burns. Always touch the steam wand by the protective rubber handgrip. Never touch the rim of the cup or place your fingers inside the cup — this is unhygienic and denotes a lack of professionalism.</p>
+  </div>
+
+  <h3>Customer Service</h3>
+  <ul class="objective-list">
+    <li><strong>Friendly Greeting</strong> — Welcome customers warmly for a positive and connecting experience.</li>
+    <li><strong>Product Expertise</strong> — Understand the menu, including coffee varieties and preparation methods, to assist customers and enhance service.</li>
+    <li><strong>Efficient Service</strong> — Prioritise speed during peak hours for prompt order fulfilment and overall customer satisfaction.</li>
+    <li><strong>Adapt to Preferences</strong> — Tailor service to customers' preferences, remembering favourites and allowing customisation.</li>
+    <li><strong>Problem Resolution</strong> — Develop effective problem-solving skills to address customer concerns, turning potential negatives into positives.</li>
+  </ul>
+
+  <div class="divider"><span class="dot"></span></div>
+
+  <h3>Hygiene Essentials</h3>
+  <ul class="objective-list">
+    <li><strong>Hand Hygiene</strong> — Wash hands regularly, especially before starting work, after handling contaminants, and after using the restroom.</li>
+    <li><strong>Clean Workstations</strong> — Regularly sanitise surfaces like countertops, espresso machines, grinders, and utensils. Establish a cleaning schedule using food-safe solutions.</li>
+    <li><strong>Proper Utensil Handling</strong> — Keep utensils clean and sanitised to avoid cross-contamination. Implement regular cleaning and replacement of frothing wands and coffee filters.</li>
+    <li><strong>Personal Hygiene</strong> — Follow a strict personal hygiene routine, including wearing clean uniforms and using disposable gloves when necessary.</li>
+    <li><strong>Food Safety</strong> — Adhere to food safety guidelines for items like milk and pastries. Monitor storage areas for cleanliness, check expiration dates, and discard expired items promptly.</li>
+  </ul>
+
+  <h3>Health &amp; Safety</h3>
+  <ul class="objective-list">
+    <li><strong>PPE</strong> — When working with cleaning solutions or descaling agents, wear gloves, safety goggles, aprons, or uniforms to shield from chemical contact.</li>
+    <li><strong>Chemical Storage</strong> — Keep chemicals in assigned areas away from food prep zones. Always check labels for contents, usage instructions, and hazard warnings.</li>
+    <li><strong>Manual Handling</strong> — Follow safe manual handling practices when moving or lifting chemical containers. Use proper lifting techniques.</li>
+    <li><strong>Equipment Maintenance</strong> — Regularly clean and descale machines using approved chemicals, following the manufacturer's guidelines.</li>
+    <li><strong>Emergency Readiness</strong> — Know the location of first aid kits, eyewash stations, and chemical spill cleanup kits. Keep emergency contact information easily accessible.</li>
+  </ul>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 12 — WATER QUALITY & CLEANING -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="page">
+  <div class="section-number">12</div>
+  <div class="section-label">Maintenance</div>
+  <h2>Water Quality &amp; Cleaning</h2>
+
+  <h3>Water Quality</h3>
+  <p>Water can be soft or hard. The more chlorine, magnesium, calcium, and sodium present, the harder the water becomes. Chlorine is used to disinfect water and can give it an unpleasant smell. You need to fit the espresso machine with a water filter — otherwise hard water can cause scale which can damage your machine.</p>
+
+  <div class="divider"><span class="dot"></span></div>
+
+  <h3>Backflushing the Espresso Machine</h3>
+  <p>Backflushing is essential to avoid a rancid or dirty taste in the espresso. The machine must be backflushed with detergent at the end of every single day. You can also backflush without detergent several times during service.</p>
+
+  <ol class="steps">
+    <li><div class="step-content"><strong>Replace the standard filter basket with a blind (no-hole) basket</strong></div></li>
+    <li><div class="step-content"><strong>Use a pinch of backflush detergent in the blind basket</strong></div></li>
+    <li><div class="step-content"><strong>Run the pump 5 times at 15-second intervals with the blind basket in place</strong></div></li>
+    <li><div class="step-content"><strong>Remove the portafilter, run the pump while using a group head brush to remove grime</strong></div></li>
+    <li><div class="step-content"><strong>Rinse the portafilter, place it back, and run the machine 5 times at 15-second intervals again</strong></div></li>
+    <li><div class="step-content"><strong>Rinse both the portafilter and the brewhead thoroughly to remove any remaining detergent</strong></div></li>
+    <li><div class="step-content"><strong>Switch back to your standard filter basket</strong></div></li>
+    <li><div class="step-content"><strong>Cycle through your shot process twice to make sure all detergent has been rinsed out</strong></div></li>
+  </ol>
+
+  <div class="callout warning">
+    <div class="callout-title">Important</div>
+    <p>Make sure you rinse the groupheads properly when using detergent. Residual detergent will taint your espresso.</p>
+  </div>
+
+  <h3>Cleaning the Portafilters &amp; Baskets</h3>
+  <p>Soak portafilters and baskets in warm, soapy water at the end of each day. Remove any built-up coffee oils that can cause rancid flavours.</p>
+
+  <h3>Cleaning the Grinder</h3>
+  <ul class="objective-list">
+    <li>At the end of each day, empty the bean hopper and store beans in an airtight container in a dry, cool place.</li>
+    <li>Wash the bean hopper with warm, soapy water and rinse properly with clean water.</li>
+    <li>If not washed regularly, oils from the coffee beans can build up and give a rancid taste to your drinks.</li>
+    <li>Wipe the grinder with a towel, removing all stains and coffee particles.</li>
+    <li>Clean the blades at least once per week, ideally each day.</li>
+    <li>Replace the blades at least once per year.</li>
+  </ul>
+</section>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- BACK COVER -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="back-cover page">
+  <div class="cover-logo">
+    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="width:140px;">
+      <circle cx="200" cy="140" r="88" fill="none" stroke="#8AAE97" stroke-width="2"/>
+      <path d="M 170 112 L 166 147 Q 166 157 176 158 L 224 158 Q 234 157 234 147 L 230 112 Z" fill="none" stroke="#8AAE97" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="200" cy="159" rx="42" ry="9" fill="none" stroke="#8AAE97" stroke-width="1.8"/>
+      <path d="M 234 125 Q 252 129 252 140 Q 252 150 238 152" fill="none" stroke="#8AAE97" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M 192 103 Q 188 94 190 84 Q 193 76 198 81" fill="none" stroke="#C8A96E" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M 200 100 Q 196 89 199 79 Q 202 71 207 76" fill="none" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M 208 103 Q 212 94 210 84 Q 207 76 202 81" fill="none" stroke="#C8A96E" stroke-width="1.3" stroke-linecap="round"/>
+      <circle cx="200" cy="196" r="2.5" fill="#8AAE97"/>
+      <text x="200" y="228" font-family="'Sora', sans-serif" font-size="17" font-weight="700" letter-spacing="1" fill="#F2F0EB" text-anchor="middle">STEPHEN'S</text>
+      <text x="200" y="248" font-family="'Sora', sans-serif" font-size="11" font-weight="500" letter-spacing="3" fill="#8AAE97" text-anchor="middle">BARISTA TRAINING</text>
+    </svg>
+  </div>
+
+  <div class="bc-line"></div>
+  <h3>Stephen O'Byrne</h3>
+  <div class="bc-title">Certified Barista Trainer</div>
+  <div class="bc-contact">
+    Waterford, Ireland<br>
+    <a href="mailto:stephen@baristatraining.ie">stephen@baristatraining.ie</a><br>
+    087-170-7846<br><br>
+    <span style="font-size:11px; color:#555; letter-spacing:1.5px; text-transform:uppercase;">SCA Qualified · On-site Training</span>
+  </div>
+</section>
+
+</body>
+</html>

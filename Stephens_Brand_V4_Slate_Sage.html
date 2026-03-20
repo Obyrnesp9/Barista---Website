@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stephen's Barista Training — V4: Slate & Sage — The Calm Expert</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@200;300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{--bg:#0a0a0a;--text:#fff;}
+  body{background:var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;overflow-x:hidden;}
+
+  .section{min-height:100vh;padding-top:20px;}
+
+  .hero{position:relative;min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;overflow:hidden;}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:100px;font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:40px;}
+  .hero-title{font-size:clamp(40px,7.5vw,90px);line-height:1.02;margin-bottom:24px;}
+  .hero-sub{font-size:clamp(15px,2.2vw,20px);max-width:560px;line-height:1.65;margin-bottom:48px;}
+  .cta{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:100px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.3s;}
+
+  .content{max-width:1100px;margin:0 auto;padding:80px 24px;}
+  .label{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;}
+  .title{font-size:clamp(26px,3.8vw,42px);margin-bottom:48px;line-height:1.12;}
+  .divider{max-width:1100px;margin:0 auto;height:1px;background:rgba(255,255,255,0.05);}
+
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  @media(max-width:768px){.g2,.g3,.g4{grid-template-columns:1fr;}}
+
+  .we{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;margin-bottom:32px;}
+  .we-col{padding:32px;background:rgba(10,10,10,0.96);}
+  .we-col h4{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
+  .we-col ul{list-style:none;}
+  .we-col li{padding:8px 0;font-size:14px;color:#bbb;border-bottom:1px solid rgba(255,255,255,0.03);}
+  .we-col li:last-child{border:none;}
+  @media(max-width:768px){.we{grid-template-columns:1fr;}}
+
+  .tg{display:grid;grid-template-columns:130px 1fr 1fr;gap:1px;background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;margin-bottom:32px;}
+  .tc{padding:14px 18px;background:rgba(10,10,10,0.96);font-size:13px;line-height:1.5;}
+  .tc.h{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;font-weight:500;}
+  .tc.ctx{font-weight:600;font-size:12px;letter-spacing:0.5px;}
+  @media(max-width:768px){.tg{grid-template-columns:1fr;}}
+
+  .tt{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;}
+  .ttc{padding:14px 18px;background:rgba(10,10,10,0.96);font-size:13px;}
+  .ttc.h{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#666;}
+  .ttc.dont{color:#ff4444;text-decoration:line-through;opacity:0.5;}
+  .ttc.do{color:#aaa;}
+  @media(max-width:768px){.tt{grid-template-columns:1fr;}}
+
+  .chat{max-width:400px;margin:0 auto;padding:28px;border-radius:20px;}
+  .cm{margin-bottom:14px;display:flex;flex-direction:column;}
+  .cm.u{align-items:flex-end;}
+  .cm.ai{align-items:flex-start;}
+  .cb{padding:14px 18px;border-radius:18px;font-size:14px;line-height:1.5;max-width:85%;}
+  .cm.u .cb{background:rgba(255,255,255,0.08);border-bottom-right-radius:4px;}
+  .cs{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;color:#555;}
+
+  .pillar{padding:36px;border-radius:14px;position:relative;overflow:hidden;}
+  .pillar .num{font-family:'Space Grotesk',sans-serif;font-size:64px;font-weight:700;opacity:0.06;position:absolute;top:-4px;right:16px;line-height:1;}
+  .pillar h3{font-size:20px;margin-bottom:6px;}
+  .pillar .tag{font-size:13px;font-style:italic;margin-bottom:14px;}
+  .pillar p{font-size:14px;line-height:1.7;color:#aaa;}
+
+  .sc{border-radius:14px;overflow:hidden;position:relative;}
+  .sc-top{height:80px;display:flex;align-items:center;justify-content:center;position:relative;}
+  .sc-body{padding:22px;}
+  .sc-price{font-size:26px;font-weight:600;margin-bottom:4px;}
+  .sc-name{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+  .sc-desc{font-size:13px;color:#888;line-height:1.6;}
+  .sc-tag{display:inline-block;padding:4px 12px;border-radius:100px;font-size:11px;font-family:'Space Grotesk',sans-serif;letter-spacing:0.3px;margin-top:10px;}
+
+  .notif{max-width:400px;margin:0 auto;border-radius:14px;overflow:hidden;}
+  .notif-h{padding:12px 16px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;}
+  .notif-b{padding:16px;font-size:14px;line-height:1.5;}
+  .notif-t{padding:6px 16px 12px;font-size:11px;color:#555;}
+
+  .traits{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+  .trait{padding:5px 14px;border-radius:100px;font-size:12px;font-family:'Space Grotesk',sans-serif;}
+
+  .section.active{display:block;}
+
+/* ============ V4: SLATE & SAGE ============ */
+  .v4 .hero{background:radial-gradient(ellipse at 50% 35%,rgba(91,123,106,0.08) 0%,transparent 55%),radial-gradient(ellipse at 75% 75%,rgba(138,174,151,0.04) 0%,transparent 40%),#0a0a0a;}
+  .v4 .hero-badge{background:rgba(91,123,106,0.12);border:1px solid rgba(138,174,151,0.3);color:#8AAE97;}
+  .v4 .hero-title{font-family:'Sora',sans-serif;font-weight:700;letter-spacing:-2px;}
+  .v4 .hero-title .a1{color:#8AAE97;}
+  .v4 .hero-sub{font-family:'Sora',sans-serif;font-weight:300;color:#888;}
+  .v4 .cta{background:linear-gradient(135deg,#5B7B6A,#8AAE97);color:#fff;}
+  .v4 .cta:hover{box-shadow:0 8px 32px rgba(91,123,106,0.4);transform:translateY(-2px);}
+  .v4 .label{color:#8AAE97;}
+  .v4 .title{font-family:'Sora',sans-serif;font-weight:700;letter-spacing:-1px;}
+  .v4 .pillar{background:rgba(91,123,106,0.04);border:1px solid rgba(91,123,106,0.1);}
+  .v4 .pillar h3{font-family:'Sora',sans-serif;font-weight:600;color:#8AAE97;}
+  .v4 .pillar .tag{color:#C8A96E;}
+  .v4 .we-col.y h4{color:#8AAE97;}
+  .v4 .we-col.n h4{color:#555;}
+  .v4 .cm.ai .cb{background:rgba(91,123,106,0.1);border:1px solid rgba(138,174,151,0.15);border-bottom-left-radius:4px;}
+  .v4 .cs.ai-n{color:#8AAE97;}
+  .v4 .chat{background:rgba(91,123,106,0.03);border:1px solid rgba(91,123,106,0.1);}
+  .v4 .sc{background:rgba(255,255,255,0.03);border:1px solid rgba(91,123,106,0.08);}
+  .v4 .sc-top{background:linear-gradient(135deg,#0a0e0c,rgba(91,123,106,0.15));}
+  .v4 .sc-price{font-family:'Sora',sans-serif;font-weight:700;color:#8AAE97;}
+  .v4 .sc-tag{background:rgba(138,174,151,0.08);border:1px solid rgba(138,174,151,0.12);color:#8AAE97;}
+  .v4 .notif{background:rgba(91,123,106,0.04);border:1px solid rgba(91,123,106,0.12);}
+  .v4 .notif-h{background:rgba(91,123,106,0.1);border-bottom:1px solid rgba(91,123,106,0.08);color:#8AAE97;}
+  .v4 .notif-b{color:#ccc;}
+  .v4 .tc.ctx{color:#8AAE97;}
+
+  
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ V4: SLATE & SAGE ═══════════════ -->
+<section class="section v4 active" id="s4">
+  <div class="hero">
+    <span class="hero-badge">&#9679; Brand Direction: Slate & Sage</span>
+    <h1 class="hero-title">Calm hands.<br><span class="a1">Consistent coffee.</span></h1>
+    <p class="hero-sub">Certified barista training that brings clarity to your cafe. On-site, on your equipment, on your terms. Your team walks away confident.</p>
+    <button class="cta">Book a Session &#9679;</button>
+  </div>
+
+  <div class="content">
+    <span class="label">Brand Identity</span>
+    <h2 class="title">The Calm Expert.<br>Quiet confidence.</h2>
+    <div style="margin:40px 0">
+      <p style="color:#777;font-size:15px;line-height:1.8;max-width:640px;font-weight:300">
+        Slate & Sage presents Stephen as the <em style="color:#8AAE97">calm expert</em> — unhurried, methodical, deeply competent. The muted green palette evokes growth, freshness, and natural craft. The slate grey grounds it in professionalism. This direction says: "relax, you're in safe hands." It's the brand that hotel training managers and experienced restaurateurs would gravitate toward. Sora's geometric precision gives it a clean, modern edge.
+      </p>
+    </div>
+
+    <div class="g2" style="margin-bottom:48px">
+      <div>
+        <div style="font-family:'Space Grotesk';font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:14px">AI SALES AGENT</div>
+        <h3 style="font-family:'Sora',sans-serif;font-size:24px;font-weight:700;color:#8AAE97;margin-bottom:6px">Stephen's Agent &#9679;</h3>
+        <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:16px;font-family:'Space Grotesk'">MEASURED · HELPFUL · CLEAR</p>
+        <p style="color:#888;font-size:14px;line-height:1.7;margin-bottom:16px;font-weight:300;font-family:'Sora',sans-serif">
+          In Slate & Sage, the AI agent is the calm receptionist at a high-end practice. It doesn't rush. It asks considered questions, gives clear answers, and guides you to the right decision without pressure. It has the energy of someone who's handled hundreds of enquiries and knows exactly what you need.
+        </p>
+        <div class="traits">
+          <span class="trait" style="background:rgba(91,123,106,0.1);border:1px solid rgba(91,123,106,0.2);color:#8AAE97">Measured</span>
+          <span class="trait" style="background:rgba(91,123,106,0.1);border:1px solid rgba(91,123,106,0.2);color:#8AAE97">Clear</span>
+          <span class="trait" style="background:rgba(200,169,110,0.1);border:1px solid rgba(200,169,110,0.15);color:#C8A96E">Helpful</span>
+          <span class="trait" style="background:rgba(200,169,110,0.1);border:1px solid rgba(200,169,110,0.15);color:#C8A96E">Trustworthy</span>
+        </div>
+      </div>
+      <div>
+        <div class="chat">
+          <div class="cm ai">
+            <span class="cs ai-n">Stephen's Agent &#9679;</span>
+            <div class="cb">Good to hear from you. To make sure I recommend the right session, a couple of quick questions: how many people need training, and what's their experience level with espresso?</div>
+          </div>
+          <div class="cm u">
+            <span class="cs">Prospect</span>
+            <div class="cb">3 staff, they've used a machine but quality is all over the place</div>
+          </div>
+          <div class="cm ai">
+            <span class="cs ai-n">Stephen's Agent &#9679;</span>
+            <div class="cb">That's a common situation — and a very solvable one. A group session would cover grind calibration, milk technique, and workflow consistency. Stephen comes to your venue, trains on your machine, and leaves your team with two reference manuals. Typically 2–3 hours. &#8364;300–420 for the group. Shall I check availability?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content">
+    <span class="label">Visual Identity</span>
+    <h2 class="title">Colour & Type</h2>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px">
+      <div style="text-align:center"><div style="width:72px;height:72px;border-radius:50%;background:#2D2D2D;border:2px solid rgba(255,255,255,0.06)"></div><div style="font-size:10px;color:#555;margin-top:8px;letter-spacing:1px;font-family:'Space Grotesk'">SLATE</div><div style="font-size:11px;color:#444;font-family:'Space Grotesk'">#2D2D2D</div></div>
+      <div style="text-align:center"><div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#5B7B6A,#8AAE97)"></div><div style="font-size:10px;color:#555;margin-top:8px;letter-spacing:1px;font-family:'Space Grotesk'">SAGE</div><div style="font-size:11px;color:#444;font-family:'Space Grotesk'">#5B7B6A</div></div>
+      <div style="text-align:center"><div style="width:72px;height:72px;border-radius:50%;background:#8AAE97"></div><div style="font-size:10px;color:#555;margin-top:8px;letter-spacing:1px;font-family:'Space Grotesk'">MINT</div><div style="font-size:11px;color:#444;font-family:'Space Grotesk'">#8AAE97</div></div>
+      <div style="text-align:center"><div style="width:72px;height:72px;border-radius:50%;background:#C8A96E"></div><div style="font-size:10px;color:#555;margin-top:8px;letter-spacing:1px;font-family:'Space Grotesk'">GOLD</div><div style="font-size:11px;color:#444;font-family:'Space Grotesk'">#C8A96E</div></div>
+      <div style="text-align:center"><div style="width:72px;height:72px;border-radius:50%;background:#F2F0EB;border:1px solid rgba(255,255,255,0.08)"></div><div style="font-size:10px;color:#555;margin-top:8px;letter-spacing:1px;font-family:'Space Grotesk'">STONE</div><div style="font-size:11px;color:#444;font-family:'Space Grotesk'">#F2F0EB</div></div>
+    </div>
+    <div style="padding:40px;border-radius:16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04)">
+      <div style="font-family:'Space Grotesk';font-size:10px;letter-spacing:2px;color:#555;margin-bottom:14px">DISPLAY — Sora Bold</div>
+      <p style="font-family:'Sora',sans-serif;font-size:40px;font-weight:700;letter-spacing:-2px;margin-bottom:20px">Calm hands. <span style="color:#8AAE97">Consistent coffee.</span></p>
+      <div style="font-family:'Space Grotesk';font-size:10px;letter-spacing:2px;color:#555;margin-bottom:14px">BODY — Sora Light</div>
+      <p style="font-family:'Sora',sans-serif;font-size:15px;font-weight:300;color:#888;line-height:1.7;margin-bottom:20px">On-site barista training by a certified professional. Your venue, your machine, your team's schedule. Two training manuals and a certificate included.</p>
+      <div style="font-family:'Space Grotesk';font-size:10px;letter-spacing:2px;color:#555;margin-bottom:14px">DATA — Space Grotesk</div>
+      <p style="font-family:'Space Grotesk';font-size:13px;color:#666;letter-spacing:0.5px"><span style="color:#8AAE97">&#9679; CERTIFIED</span> &nbsp;·&nbsp; FROM &#8364;80/PP &nbsp;·&nbsp; ON-SITE &nbsp;·&nbsp; <span style="color:#C8A96E">NATIONWIDE IE</span> &nbsp;·&nbsp; 2–7 HRS</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content">
+    <span class="label">Messaging Pillars</span>
+    <h2 class="title">What we stand for</h2>
+    <div class="g3">
+      <div class="pillar"><span class="num">01</span><h3>Come to You</h3><p class="tag">"Your venue. Your machine. No disruption."</p><p>Training happens where it matters — in your kitchen, on your equipment, at a time that works. No classroom theory. No unfamiliar machines. Just practical skills that transfer immediately.</p></div>
+      <div class="pillar"><span class="num">02</span><h3>Systems That Last</h3><p class="tag">"Two manuals and a standard your team can maintain."</p><p>The biggest concern is quality dropping after training. Stephen's two 40-page manuals are daily reference tools — designed for behind the counter, not a filing cabinet.</p></div>
+      <div class="pillar"><span class="num">03</span><h3>One Call</h3><p class="tag">"Training, equipment, setup — all handled."</p><p>For new openings: equipment packages from &#8364;1,500 to &#8364;18,000, machine setup, workflow design, and full team training. One professional. One relationship. Everything sorted.</p></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content">
+    <span class="label">Voice & Tone</span>
+    <h2 class="title">How Stephen speaks</h2>
+    <div class="we">
+      <div class="we-col y"><h4>&#9679; We Are</h4><ul><li>Measured and calm — unhurried expertise</li><li>Clear — pricing, process, outcomes all transparent</li><li>Competent without showing off</li><li>Helpful before anything else</li><li>Warm but never over-familiar</li></ul></div>
+      <div class="we-col n"><h4>&#10007; We Are Not</h4><ul><li>Rushed or high-energy sales</li><li>Jargon-heavy ("extraction optimisation")</li><li>Generic — each recommendation is specific</li><li>Distant — we're professional, not cold</li><li>Complicated — everything is straightforward</li></ul></div>
+    </div>
+    <div class="tg">
+      <div class="tc h">Context</div><div class="tc h">Tone</div><div class="tc h">Example</div>
+      <div class="tc ctx">First Contact</div><div class="tc" style="color:#aaa">Measured, welcoming</div><div class="tc" style="color:#aaa">"Good to hear from you. A couple of quick questions so I can recommend the right option for your situation."</div>
+      <div class="tc ctx" style="color:#C8A96E">Recommendation</div><div class="tc" style="color:#aaa">Confident, clear</div><div class="tc" style="color:#aaa">"Based on what you've told me, a group session makes the most sense. 2–3 hours, all three staff, at your venue."</div>
+      <div class="tc ctx" style="color:#888">Follow-Up</div><div class="tc" style="color:#aaa">Patient, present</div><div class="tc" style="color:#aaa">"Just checking in — no rush at all. I'm here whenever you're ready to move forward."</div>
+      <div class="tc ctx" style="color:#ff6b6b">Objection</div><div class="tc" style="color:#aaa">Steady, evidence-based</div><div class="tc" style="color:#aaa">"That's a fair question. The manuals are designed for exactly that — step-by-step reference your team uses daily."</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content">
+    <span class="label">Service Cards</span>
+    <h2 class="title">Training packages</h2>
+    <div class="g4">
+      <div class="sc"><div class="sc-top" style="font-size:28px">&#9749;</div><div class="sc-body"><div class="sc-name">Individual</div><div class="sc-price">&#8364;80–95</div><div class="sc-desc">Per person + VAT · 2–3 hours on-site</div></div></div>
+      <div class="sc"><div class="sc-top" style="font-size:28px">&#9749;&#9749;</div><div class="sc-body"><div class="sc-name">Group</div><div class="sc-price">&#8364;300–420</div><div class="sc-desc">4–6 people + VAT · Full team</div><span class="sc-tag">Best Value</span></div></div>
+      <div class="sc"><div class="sc-top" style="font-size:28px">&#9200;</div><div class="sc-body"><div class="sc-name">Half Day</div><div class="sc-price">&#8364;90–150</div><div class="sc-desc">Per person + VAT · 3–4 hours</div></div></div>
+      <div class="sc"><div class="sc-top" style="font-size:28px">&#127775;</div><div class="sc-body"><div class="sc-name">Full Day</div><div class="sc-price">&#8364;150–200</div><div class="sc-desc">Per person + VAT · 5–7 hours</div><span class="sc-tag">Comprehensive</span></div></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content">
+    <span class="label">Language</span>
+    <h2 class="title">Our words</h2>
+    <div class="tt">
+      <div class="ttc h">Concept</div><div class="ttc h">We Say &#9679;</div><div class="ttc h" style="color:#ff4444">Never &#10007;</div>
+      <div class="ttc" style="color:#aaa">Service</div><div class="ttc do">"Training session" / "Hands-on session"</div><div class="ttc dont">"Coffee education programme"</div>
+      <div class="ttc" style="color:#aaa">Approach</div><div class="ttc do">"On-site" / "At your venue"</div><div class="ttc dont">"Mobile training unit"</div>
+      <div class="ttc" style="color:#aaa">Result</div><div class="ttc do">"Consistent quality" / "Confidence"</div><div class="ttc dont">"Optimal parameters"</div>
+      <div class="ttc" style="color:#aaa">Materials</div><div class="ttc do">"Training manuals" / "Reference guides"</div><div class="ttc dont">"Courseware" / "Modules"</div>
+      <div class="ttc" style="color:#aaa">Tone</div><div class="ttc do">"Here to help" / "No rush"</div><div class="ttc dont">"Limited availability" / "Act now"</div>
+      <div class="ttc" style="color:#aaa">Identity</div><div class="ttc do">"Stephen" / "I"</div><div class="ttc dont">"Our team" / "The company"</div>
+    </div>
+  </div>
+
+  <div class="content" style="text-align:center">
+    <span class="label">AI Agent Alert</span>
+    <h2 class="title" style="margin-bottom:28px">How the lead gets contacted</h2>
+    <div class="notif" style="text-align:left">
+      <div class="notif-h">&#9679; Stephen's Barista Training</div>
+      <div class="notif-b"><strong style="color:#fff">New enquiry: The Granary Cafe, Dungarvan — Consistency issues</strong><br><br>5 staff, existing setup, quality varies between shifts.<br><br><em style="color:#C8A96E">"Thanks for getting in touch. Inconsistency between shifts is one of the most common issues I help with — and one of the easiest to solve with the right training. A group session at your venue would cover grind calibration, milk technique, and workflow. Your team walks away with two reference manuals they can use every shift. Happy to discuss timing whenever suits."</em></div>
+      <div class="notif-t">Just now</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
