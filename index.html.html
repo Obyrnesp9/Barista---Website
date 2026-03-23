@@ -1,135 +1,1749 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Certified Barista Training | Stephen O'Byrne</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certified Barista Training | Stephen O'Byrne</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="Favicon_V1.svg">
 
-<link rel="icon" href="Favicon_V1.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+        html, body {
+            background: #0A0A0A;
+            color: #F2F0EB;
+            font-family: 'Sora', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
 
-<style>
-body {
-    margin:0;
-    background:#0A0A0A;
-    color:#F2F0EB;
-    font-family:'Sora',sans-serif;
-}
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            letter-spacing: -2px;
+            line-height: 1.2;
+        }
 
-/* NAV */
-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 30px;
-    border-bottom:1px solid #222;
-}
+        .caps, .stat-label, .card-label {
+            font-family: 'Space Grotesk', monospace;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
+        }
 
-nav img{height:60px;cursor:pointer;}
+        .display-xl {
+            font-size: clamp(48px, 8vw, 90px);
+            line-height: 1.1;
+        }
 
-.nav-links a{
-    margin-left:20px;
-    cursor:pointer;
-    text-transform:uppercase;
-    font-size:12px;
-}
+        .display-lg {
+            font-size: 48px;
+            line-height: 1.2;
+        }
 
-/* HERO */
-.hero{
-    text-align:center;
-    padding:100px 20px;
-}
+        .display-md {
+            font-size: 32px;
+            line-height: 1.3;
+        }
 
-.hero h1{
-    font-size:48px;
-}
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(138, 174, 151, 0.15);
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.accent{color:#8AAE97;}
+        .nav-logo {
+            height: 90px;
+            flex-shrink: 0;
+            image-rendering: -webkit-optimize-contrast;
+        }
 
-.cta-button{
-    margin-top:30px;
-    padding:15px 30px;
-    background:#8AAE97;
-    border:none;
-    cursor:pointer;
-}
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
 
-/* SECTIONS */
-.content-section{display:none;}
-.content-section.active{display:block;}
+        nav a {
+            font-family: 'Space Grotesk', monospace;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #F2F0EB;
+            text-decoration: none;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
 
-/* SIMPLE CARDS */
-.section{
-    padding:60px 20px;
-    text-align:center;
-}
+        nav a:hover {
+            color: #8AAE97;
+        }
 
-img{
-    max-width:300px;
-    margin-top:20px;
-}
+        nav a.active {
+            border-bottom-color: #8AAE97;
+            color: #8AAE97;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            animation: fadeIn 0.6s ease-in-out forwards;
+        }
+
+        .content-section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(91, 123, 106, 0.15) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            color: #F2F0EB;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .accent {
+            color: #8AAE97;
+        }
+
+        .hero-subline {
+            font-size: 18px;
+            color: #C8A96E;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 48px;
+            background: linear-gradient(135deg, #5B7B6A 0%, #8AAE97 100%);
+            color: #0A0A0A;
+            text-decoration: none;
+            font-family: 'Space Grotesk', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(138, 174, 151, 0.2);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            padding: 80px 40px;
+            border-top: 1px solid rgba(138, 174, 151, 0.15);
+            border-bottom: 1px solid rgba(138, 174, 151, 0.15);
+            background: #0A0A0A;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #8AAE97;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: #C8A96E;
+            font-size: 11px;
+        }
+
+        /* Pull Quote */
+        .pull-quote {
+            padding: 80px 40px;
+            text-align: center;
+            background: #0A0A0A;
+        }
+
+        .quote-text {
+            font-size: 42px;
+            font-style: italic;
+            color: #F2F0EB;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .quote-mark {
+            color: #8AAE97;
+            font-size: 64px;
+            line-height: 0.5;
+            margin-right: 12px;
+        }
+
+        /* Lead Magnet Section */
+        .lead-magnet-section {
+            padding: 80px 40px;
+            background: linear-gradient(160deg, rgba(91,123,106,0.08) 0%, rgba(10,10,10,1) 40%, rgba(200,169,110,0.04) 100%);
+            border-top: 1px solid rgba(138,174,151,0.12);
+            border-bottom: 1px solid rgba(138,174,151,0.12);
+        }
+
+        .lead-magnet-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .lead-magnet-content {
+            flex: 1;
+        }
+
+        .lead-magnet-visual {
+            flex-shrink: 0;
+        }
+
+        .lead-magnet-mockup {
+            width: 220px;
+            height: 300px;
+            background: linear-gradient(145deg, #111 0%, #0A0A0A 100%);
+            border: 1px solid rgba(138,174,151,0.2);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(138,174,151,0.05);
+            transform: rotate(2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .lead-magnet-mockup:hover {
+            transform: rotate(0deg) scale(1.03);
+        }
+
+        .mockup-cover {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .lead-magnet-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 16px 32px;
+            background: #25D366;
+            color: #F2F0EB;
+            font-family: 'Sora', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s ease, transform 0.2s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .lead-magnet-btn:hover {
+            background: #20bd5a;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .lead-magnet-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+            .lead-magnet-visual {
+                order: -1;
+            }
+            .lead-magnet-mockup {
+                width: 180px;
+                height: 245px;
+                transform: rotate(0deg);
+            }
+            .lead-magnet-section {
+                padding: 50px 24px;
+            }
+        }
+
+        /* Pillars Section */
+        .pillars-section {
+            padding: 100px 40px;
+            background: #0A0A0A;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pillar {
+            position: relative;
+            padding-left: 80px;
+        }
+
+        .pillar-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 72px;
+            font-weight: 700;
+            color: rgba(138, 174, 151, 0.1);
+            line-height: 1;
+        }
+
+        .pillar-title {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: #8AAE97;
+        }
+
+        .pillar-text {
+            font-size: 16px;
+            color: #F2F0EB;
+            line-height: 1.8;
+        }
+
+        /* Pricing Cards */
+        .pricing-section {
+            padding: 100px 40px;
+            background: #0A0A0A;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .pricing-header h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background: #2D2D2D;
+            padding: 50px 40px;
+            border: 1px solid rgba(138, 174, 151, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .price-card:hover {
+            border-color: #8AAE97;
+            background: rgba(45, 45, 45, 0.8);
+            transform: translateY(-5px);
+        }
+
+        .price-card-label {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #8AAE97;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .price-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #F2F0EB;
+        }
+
+        .price-range {
+            font-size: 28px;
+            font-weight: 700;
+            color: #C8A96E;
+            margin-bottom: 20px;
+        }
+
+        .price-description {
+            font-size: 14px;
+            color: #C8A96E;
+            margin-bottom: 30px;
+            border-top: 1px solid rgba(138, 174, 151, 0.2);
+            padding-top: 20px;
+        }
+
+        .price-card-cta {
+            width: 100%;
+            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid #8AAE97;
+            color: #8AAE97;
+            text-decoration: none;
+            font-family: 'Space Grotesk', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .price-card-cta:hover {
+            background: #8AAE97;
+            color: #0A0A0A;
+        }
+
+        /* About Page */
+        .about-hero {
+            padding: 80px 40px;
+        }
+
+        .about-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            background: none;
+            border: 1px solid rgba(138, 174, 151, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-placeholder::before {
+            content: '';
+        }
+
+        .photo-text {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #F2F0EB;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .bio-content h2 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            color: #8AAE97;
+        }
+
+        .bio-content p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        /* Differentiators */
+        .differentiators {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .differentiator {
+            padding: 30px;
+            background: #2D2D2D;
+            border-left: 3px solid #8AAE97;
+        }
+
+        .differentiator-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #8AAE97;
+        }
+
+        .differentiator-text {
+            font-size: 14px;
+            color: #F2F0EB;
+            line-height: 1.6;
+        }
+
+        /* Credentials Grid */
+        .credentials {
+            padding: 80px 40px;
+            background: #0A0A0A;
+            border-top: 1px solid rgba(138, 174, 151, 0.15);
+        }
+
+        .credentials-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .credentials-header h3 {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .credential-item {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .credential-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .credential-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #8AAE97;
+        }
+
+        .credential-desc {
+            font-size: 13px;
+            color: #C8A96E;
+        }
+
+        /* Services Page */
+        .services-header {
+            padding: 80px 40px 40px;
+            text-align: center;
+        }
+
+        .services-header h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+        }
+
+        .services-intro {
+            font-size: 18px;
+            color: #C8A96E;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: #2D2D2D;
+            padding: 60px 40px;
+            border: 1px solid rgba(138, 174, 151, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: #8AAE97;
+            transform: translateY(-5px);
+        }
+
+        .service-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #C8A96E;
+            color: #0A0A0A;
+            padding: 4px 16px;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            border-radius: 20px;
+        }
+
+        .service-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #8AAE97;
+        }
+
+        .service-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #C8A96E;
+            margin-bottom: 12px;
+        }
+
+        .service-duration {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #8AAE97;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+
+        .service-description {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #F2F0EB;
+            margin-bottom: 30px;
+        }
+
+        .service-bullets {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .service-bullets li {
+            font-size: 14px;
+            color: #C8A96E;
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .service-bullets li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #8AAE97;
+            font-weight: bold;
+        }
+
+        /* Equipment Section */
+        .equipment-section {
+            padding: 80px 40px;
+            background: #0A0A0A;
+            border-top: 1px solid rgba(138, 174, 151, 0.15);
+        }
+
+        .equipment-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .equipment-header h2 {
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .equipment-card {
+            background: #2D2D2D;
+            padding: 40px;
+            border: 1px solid rgba(138, 174, 151, 0.2);
+            text-align: center;
+        }
+
+        .equipment-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: #C8A96E;
+            margin-bottom: 16px;
+        }
+
+        .equipment-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #8AAE97;
+            margin-bottom: 16px;
+        }
+
+        .equipment-desc {
+            font-size: 14px;
+            color: #F2F0EB;
+            line-height: 1.7;
+        }
+
+        /* What's Included */
+        .included-section {
+            padding: 80px 40px;
+            background: #0A0A0A;
+            border-top: 1px solid rgba(138, 174, 151, 0.15);
+        }
+
+        .included-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .included-header h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .included-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .included-item {
+            padding: 40px;
+            background: #2D2D2D;
+            border-left: 3px solid #8AAE97;
+        }
+
+        .included-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8AAE97;
+            margin-bottom: 12px;
+        }
+
+        .included-text {
+            font-size: 14px;
+            color: #F2F0EB;
+            line-height: 1.7;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 40px;
+            background: #0A0A0A;
+            border-top: 1px solid rgba(138, 174, 151, 0.15);
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .faq-header h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(138, 174, 151, 0.15);
+            padding-bottom: 24px;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-size: 16px;
+            font-weight: 700;
+            color: #8AAE97;
+            margin-bottom: 12px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #C8A96E;
+        }
+
+        .faq-toggle {
+            font-size: 20px;
+            color: #8AAE97;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            font-size: 14px;
+            color: #F2F0EB;
+            line-height: 1.8;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer.open {
+            max-height: 500px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 40px;
+            background: linear-gradient(135deg, rgba(91, 123, 106, 0.1) 0%, rgba(45, 45, 45, 0.5) 100%);
+            text-align: center;
+            border-top: 1px solid rgba(138, 174, 151, 0.15);
+            border-bottom: 1px solid rgba(138, 174, 151, 0.15);
+        }
+
+        .cta-section h2 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            color: #8AAE97;
+        }
+
+        .cta-content {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .cta-item {
+            text-align: center;
+        }
+
+        .cta-label {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #8AAE97;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .cta-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #C8A96E;
+        }
+
+        .cta-value a {
+            color: #C8A96E;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .cta-value a:hover {
+            color: #8AAE97;
+        }
+
+        /* Footer */
+        footer {
+            background: #0A0A0A;
+            border-top: 1px solid rgba(138, 174, 151, 0.15);
+            padding: 60px 40px 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #8AAE97;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            color: #F2F0EB;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: #C8A96E;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .footer-section a:hover {
+            color: #8AAE97;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(138, 174, 151, 0.15);
+            padding-top: 30px;
+            font-size: 13px;
+            color: #8AAE97;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 10px 16px;
+            }
+
+            .nav-logo {
+                height: 45px;
+            }
+
+            .nav-links {
+                gap: 24px;
+            }
+
+            nav a {
+                font-size: 11px;
+            }
+
+            .hero {
+                padding: 80px 20px;
+                min-height: auto;
+            }
+
+            .display-xl {
+                font-size: clamp(32px, 6vw, 48px);
+            }
+
+            .display-lg {
+                font-size: 32px;
+            }
+
+            .stats-bar {
+                padding: 50px 20px;
+                gap: 30px;
+            }
+
+            .pillars-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-hero-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-subline {
+                font-size: 16px;
+            }
+
+            .pull-quote {
+                padding: 60px 20px;
+            }
+
+            .quote-text {
+                font-size: 28px;
+            }
+
+            .pillars-section,
+            .pricing-section,
+            .equipment-section,
+            .included-section,
+            .faq-section {
+                padding: 60px 20px;
+            }
+
+            .cta-content {
+                gap: 30px;
+            }
+
+            footer {
+                padding: 40px 20px 30px;
+            }
+
+            .footer-content {
+                gap: 40px;
+            }
+
+            .price-card,
+            .service-card,
+            .equipment-card {
+                padding: 30px 20px;
+            }
+        }
+    
+        /* ===== BEAN RAIN DECORATIONS ===== */
+        @keyframes beanFall {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .falling-beans-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .falling-bean {
+            position: fixed;
+            width: 20px;
+            height: 30px;
+            pointer-events: none;
+        }
+
+        .falling-bean svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .falling-bean:nth-child(1) { left: 5%; animation: beanFall 18s ease-in infinite; }
+        .falling-bean:nth-child(2) { left: 10%; animation: beanFall 20s ease-in infinite 1.5s; }
+        .falling-bean:nth-child(3) { left: 15%; animation: beanFall 22s ease-in infinite 3s; }
+        .falling-bean:nth-child(4) { left: 20%; animation: beanFall 19s ease-in infinite 0.8s; }
+        .falling-bean:nth-child(5) { left: 25%; animation: beanFall 21s ease-in infinite 2.2s; }
+        .falling-bean:nth-child(6) { left: 30%; animation: beanFall 23s ease-in infinite 1.1s; }
+        .falling-bean:nth-child(7) { left: 40%; animation: beanFall 20s ease-in infinite 2.8s; }
+        .falling-bean:nth-child(8) { left: 50%; animation: beanFall 19s ease-in infinite 0.3s; }
+        .falling-bean:nth-child(9) { left: 60%; animation: beanFall 21s ease-in infinite 2.5s; }
+        .falling-bean:nth-child(10) { left: 70%; animation: beanFall 22s ease-in infinite 1.7s; }
+        .falling-bean:nth-child(11) { left: 80%; animation: beanFall 20s ease-in infinite 3.1s; }
+        .falling-bean:nth-child(12) { left: 90%; animation: beanFall 19s ease-in infinite 0.5s; }
+
+        .hero-bean-watermark {
+            position: absolute;
+            opacity: 0.07;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .scattered-bean {
+            position: absolute;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .bean-cluster {
+            position: relative;
+            display: inline-block;
+            pointer-events: none;
+            height: 80px;
+            width: 80px;
+            margin: 20px 0;
+        }
+
+        .bean-cluster svg {
+            position: absolute;
+            opacity: 0.15;
+        }
+
+        .card-bean-icon {
+            position: absolute;
+            opacity: 0.15;
+            pointer-events: none;
+            width: 20px;
+            height: 30px;
+        }
+
+        .card-bean-icon.top-right {
+            top: 12px;
+            right: 12px;
+        }
+
+        .card-bean-icon.bottom-left {
+            bottom: 12px;
+            left: 12px;
+        }
+
+        .footer-bean-border {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px 0;
+            pointer-events: none;
+            border-top: 1px solid rgba(138, 174, 151, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .footer-bean {
+            width: 15px;
+            height: 22px;
+            opacity: 0.12;
+        }
+        /* ===== END BEAN RAIN ===== */
 </style>
 </head>
-
 <body>
+    <div class="falling-beans-container">
+        <div class="falling-bean" style="color: #8AAE97;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="falling-bean" style="color: #C8A96E;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="falling-bean" style="color: #8AAE97;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="falling-bean" style="color: #C8A96E;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="falling-bean" style="color: #8AAE97;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="falling-bean" style="color: #C8A96E;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="falling-bean" style="color: #8AAE97;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="falling-bean" style="color: #C8A96E;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="falling-bean" style="color: #8AAE97;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="falling-bean" style="color: #C8A96E;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="falling-bean" style="color: #8AAE97;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="falling-bean" style="color: #C8A96E;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+    </div>
 
-<nav>
-<img src="Logo_ClassicEmblem_Transparent.png" onclick="showSection('home')">
-<div class="nav-links">
-<a onclick="showSection('home')">Home</a>
-<a onclick="showSection('about')">About</a>
-<a onclick="showSection('services')">Services</a>
-</div>
-</nav>
+    <!-- Navigation -->
+    <nav>
+        <img src="Logo_ClassicEmblem_Transparent.png" alt="Stephen's Barista Training" class="nav-logo" onclick="showSection('home')" style="cursor:pointer;">
+        <div class="nav-links">
+            <a class="nav-link active" onclick="showSection('home')">Home</a>
+            <a class="nav-link" onclick="showSection('about')">About Me</a>
+            <a class="nav-link" onclick="showSection('services')">Services</a>
+        </div>
+    </nav>
 
-<!-- HOME -->
-<div id="home" class="content-section active">
-<section class="hero">
-<h1>
-Great equipment does not<br>
-<span class="accent">guarantee great coffee.</span>
-</h1>
+    <!-- WhatsApp Chat Button -->
+    <a href="https://wa.me/353851531556" target="_blank" rel="noopener" style="position: fixed; bottom: 28px; right: 28px; z-index: 9999; width: 60px; height: 60px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.3s ease, box-shadow 0.3s ease; text-decoration: none;" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 28px rgba(37,211,102,0.5)';" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(37,211,102,0.4)';">
+        <svg viewBox="0 0 32 32" width="32" height="32" fill="white"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.502 1.14 6.744 3.072 9.378L1.06 31.116l5.963-1.973A15.93 15.93 0 0016.004 32C24.826 32 32 24.826 32 16.004 32 7.174 24.826 0 16.004 0zm9.32 22.616c-.396 1.116-1.956 2.04-3.204 2.312-.852.18-1.968.324-5.724-1.232-4.812-1.992-7.908-6.876-8.148-7.2-.228-.324-1.932-2.58-1.932-4.92s1.224-3.492 1.656-3.972c.396-.432 1.044-.648 1.668-.648.204 0 .384.012.552.024.432.024.648.048 .936.72.36.84 1.236 3.012 1.344 3.228.108.216.216.504.072.792-.132.3-.252.432-.468.684-.216.252-.42.444-.636.72-.204.24-.42.492-.18.96.24.468 1.068 1.764 2.292 2.856 1.572 1.404 2.904 1.836 3.312 2.04.408.204.648.168.888-.108.252-.276 1.068-1.248 1.356-1.68.276-.432.564-.36.948-.216.396.144 2.508 1.188 2.94 1.404.432.216.72.324.828.504.108.18.108 1.044-.288 2.16z"/></svg>
+    </a>
 
-<p>Certified barista training across Ireland</p>
+    <!-- HOME SECTION -->
+    <div id="home" class="content-section active">
+        <!-- Hero -->
+        <section class="hero">
+        <div style="position: relative; pointer-events: none; z-index: 1; width: 100%; height: 100%; position: absolute; top: 0; left: 0;">
+            <svg class="hero-bean-watermark" viewBox="0 0 30 40" style="width: 280px; height: 420px; top: 80px; left: 5%; color: #C8A96E;">
+                <ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/>
+                <path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/>
+            </svg>
+            <svg class="hero-bean-watermark" viewBox="0 0 30 40" style="width: 320px; height: 480px; top: 150px; right: 8%; color: #8AAE97;">
+                <ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/>
+                <path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/>
+            </svg>
+            <svg class="hero-bean-watermark" viewBox="0 0 30 40" style="width: 250px; height: 375px; bottom: -50px; left: 50%; color: #C8A96E; transform: translateX(-50%);">
+                <ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/>
+                <path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/>
+            </svg>
+        </div>
 
-<button class="cta-button" onclick="showSection('services')">
-Book a Session
-</button>
+            <div class="hero-content">
+                <h1 class="display-xl">Great equipment does not<br><span class="accent">guarantee great coffee.</span></h1>
+                <p class="hero-subline">Certified barista training that brings clarity to your café. On-site, on your equipment, on your terms.</p>
+                <button class="cta-button" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Book a Session</button>
+            </div>
+        </section>
 
-<br>
-<img src="Stephens headshot.jpeg">
-</section>
-</div>
+        <!-- Stephen Photo -->
+        <section style="display: flex; justify-content: center; padding: 60px 40px; background: #0A0A0A;">
+            <div style="display: flex; align-items: center; gap: 60px; max-width: 1000px; flex-wrap: wrap; justify-content: center;">
+                <img src="Stephens headshot.jpeg" alt="Stephen O'Byrne" style="width: 280px; height: 350px; object-fit: cover; object-position: center 20%; border: 1px solid rgba(138,174,151,0.2); filter: grayscale(15%);">
+                <div style="flex: 1; min-width: 280px;">
+                    <p style="font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #8AAE97; margin-bottom: 12px;">Your Trainer</p>
+                    <p style="font-size: 18px; color: #F2F0EB; line-height: 1.8; font-weight: 300;">Stephen O'Byrne — Certified Barista Trainer. 20 years in sales and F&amp;B industry. Trusted by hotels, cafés, restaurants, and coffee businesses across Ireland.</p>
+                </div>
+            </div>
+        </section>
 
-<!-- ABOUT -->
-<div id="about" class="content-section">
-<section class="section">
-<h2>About Stephen</h2>
-<p>Certified Barista Trainer with 20+ years experience working with cafés across Ireland.</p>
-</section>
-</div>
+        <!-- Stats Bar -->
+        <section class="stats-bar">
+            <div class="stat">
+                <div class="stat-value">500+</div>
+                <div class="stat-label">Trained Professionals</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">Nationwide</div>
+                <div class="stat-label">Across Ireland</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">On-Site</div>
+                <div class="stat-label">Your Equipment</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">Certified</div>
+                <div class="stat-label">SCA Qualified</div>
+            </div>
+        </section>
 
-<!-- SERVICES -->
-<div id="services" class="content-section">
-<section class="section">
-<h2>Services</h2>
-<p>On-site barista training tailored to your business.</p>
-</section>
-</div>
+        <!-- Pull Quote -->
+        <section class="pull-quote">
+            <p class="quote-text"><span class="quote-mark">"</span>Your team walks away confident.</p>
+        </section>
 
-<script>
-function showSection(sectionId){
-    const sections=document.querySelectorAll('.content-section');
-    sections.forEach(s=>s.classList.remove('active'));
+        <!-- Lead Magnet -->
+        <section class="lead-magnet-section">
+            <div class="lead-magnet-inner">
+                <div class="lead-magnet-content">
+                    <div class="caps" style="color: #C8A96E; margin-bottom: 12px; font-size: 11px; letter-spacing: 2px;">Free Guide</div>
+                    <h2 style="font-size: 36px; color: #F2F0EB; margin-bottom: 16px; letter-spacing: -1px; line-height: 1.2;">Your Customers Can Taste<br>the Difference.<br><span style="color: #C8A96E;">Can You?</span></h2>
+                    <p style="font-size: 16px; color: #bbb; font-weight: 300; line-height: 1.8; margin-bottom: 20px;">Most cafés are making at least one of these five espresso mistakes right now. The result? Flat shots. Bitter lattes. And customers who quietly walk to the place down the road.</p>
+                    <p style="font-size: 16px; color: #bbb; font-weight: 300; line-height: 1.8; margin-bottom: 24px;">I've trained hundreds of baristas across Ireland. These are the five problems I fix on <em>every single visit</em> — and every one of them costs you repeat business.</p>
+                    <div style="font-size: 14px; color: #8AAE97; margin-bottom: 28px; line-height: 2;">
+                        <span style="color: #C8A96E;">✓</span> &nbsp;Why your espresso tastes different every hour<br>
+                        <span style="color: #C8A96E;">✓</span> &nbsp;The 60-second milk test most baristas fail<br>
+                        <span style="color: #C8A96E;">✓</span> &nbsp;One storage mistake killing your beans overnight<br>
+                        <span style="color: #C8A96E;">✓</span> &nbsp;The cleaning step 70% of cafés skip — and what it does to flavour<br>
+                        <span style="color: #C8A96E;">✓</span> &nbsp;A quick self-audit you can run before tomorrow's service
+                    </div>
+                    <a href="https://wa.me/353851531556?text=Hi%20Stephen%2C%20I%27d%20like%20the%20free%20espresso%20mistakes%20guide%20please" class="lead-magnet-btn">
+                        <svg style="width: 22px; height: 22px; vertical-align: middle; margin-right: 8px;" viewBox="0 0 24 24" fill="#F2F0EB"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Get the Free Guide on WhatsApp
+                    </a>
+                    <p style="font-size: 12px; color: #666; margin-top: 12px;">Instant download. No email required. No spam. Just the guide.</p>
+                </div>
+                <div class="lead-magnet-visual">
+                    <div class="lead-magnet-mockup">
+                        <div class="mockup-cover">
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 8px; letter-spacing: 2px; color: #8AAE97; text-transform: uppercase; margin-bottom: 10px;">Free Guide</div>
+                            <div style="font-size: 16px; font-weight: 700; color: #F2F0EB; line-height: 1.3; margin-bottom: 6px;">5 Espresso<br>Mistakes</div>
+                            <div style="font-size: 12px; color: #C8A96E; font-weight: 700; line-height: 1.3;">Costing You<br>Customers</div>
+                            <div style="margin-top: 16px; width: 30px; height: 1px; background: #8AAE97; opacity: 0.4;"></div>
+                            <div style="font-size: 8px; color: #999; margin-top: 10px;">Stephen O'Byrne</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    document.getElementById(sectionId).classList.add('active');
+        <!-- Pillars -->
+        <section class="pillars-section">
+            <div class="pillars-grid">
+                <div class="pillar">
+                    <div class="pillar-number">01</div>
+                    <h3 class="pillar-title">Come to You</h3>
+                    <p class="pillar-text">No disruption to your schedule. Training happens on your equipment, in your space, at your pace. You remain fully in control.</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-number">02</div>
+                    <h3 class="pillar-title">Systems That Last</h3>
+                    <p class="pillar-text">Every session leaves your team with documented procedures, calibration notes, and proven workflows they can use every single day.</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-number">03</div>
+                    <h3 class="pillar-title">One Call Away</h3>
+                    <p class="pillar-text">Questions after training? Need a refresher? One phone call or email and I'm there. Ongoing support built into every package.</p>
+                </div>
+            </div>
+        </section>
 
-    window.scrollTo({top:0,behavior:'smooth'});
-}
-</script>
+        <!-- Pricing -->
+        <section class="pricing-section">
+            <div class="pricing-header">
+                <h2>Packages</h2>
+                <p style="font-size: 16px; color: #C8A96E; margin-top: 16px;">Choose the training that fits your café.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="price-card-label">Single Barista</div>
+                    <h3 class="price-card-title">Individual</h3>
+                    <p class="price-description">2–3 hours of dedicated one-on-one training on your machine.</p>
+                    <button class="price-card-cta" onclick="alert('Contact Stephen O\'Byrne to book')">Inquire</button>
+                </div>
+                <div class="price-card">
+                    <div class="price-card-label">Best Value</div>
+                    <h3 class="price-card-title">Group Training</h3>
+                    <p class="price-description">4–6 people, 2–3 hours. Most popular option.</p>
+                    <button class="price-card-cta" onclick="alert('Contact Stephen O\'Byrne to book')">Inquire</button>
+                </div>
+                <div class="price-card">
+                    <div class="price-card-label">Deep Dive</div>
+                    <h3 class="price-card-title">Half Day Intensive</h3>
+                    <p class="price-description">3–4 hours covering advanced technique and troubleshooting.</p>
+                    <button class="price-card-cta" onclick="alert('Contact Stephen O\'Byrne to book')">Inquire</button>
+                </div>
+                <div class="price-card">
+                    <div class="price-card-label">Comprehensive</div>
+                    <h3 class="price-card-title">Full Day</h3>
+                    <p class="price-description">5–7 hours. Comprehensive certification and systems.</p>
+                    <button class="price-card-cta" onclick="alert('Contact Stephen O\'Byrne to book')">Inquire</button>
+                </div>
+            </div>
+        </section>
+    </div>
 
+    <!-- ABOUT SECTION -->
+    <div id="about" class="content-section">
+        <!-- About Hero -->
+        <section class="about-hero">
+            <div class="about-hero-grid">
+                <div class="photo-placeholder" style="background: none; border: none;">
+                    <img src="Stephens headshot.jpeg" alt="Stephen O'Byrne — Barista Trainer" style="width: 100%; height: 100%; object-fit: cover; object-position: center 20%; border: 1px solid rgba(138, 174, 151, 0.2);">
+                </div>
+                <div class="bio-content">
+                    <h2>About Stephen</h2>
+                    <p style="font-size: 18px; font-weight: 400; color: #F2F0EB; margin-bottom: 16px;">Stephen O'Byrne — Certified Barista Trainer</p>
+                    <p>20 years in sales and F&amp;B industry. Trusted by hotels, cafés, restaurants, and coffee businesses across Ireland, Stephen delivers precise, professional training tailored to all levels — ensuring every trainee leaves confident, consistent, and industry-ready.</p>
+                    <p style="font-style: italic; color: #C8A96E; font-size: 17px; margin: 24px 0;">"…training that builds confidence, consistency, and professional excellence."</p>
+                    <p>Countless trained professionals and baristas. Catering to all levels, whether you're starting or fine tuning.</p>
+                    <p>I come to you. I train on your equipment. I document everything. And I stay available long after the session ends.</p>
+
+                    <div class="differentiators">
+                        <div class="differentiator">
+                            <div class="differentiator-title">On-Site Training</div>
+                            <p class="differentiator-text">No coffee school classroom. Your equipment, your environment, real-world scenarios.</p>
+                        </div>
+                        <div class="differentiator">
+                            <div class="differentiator-title">Two Training Manuals</div>
+                            <p class="differentiator-text">Professional-grade handbooks your team keeps and references daily.</p>
+                        </div>
+                        <div class="differentiator">
+                            <div class="differentiator-title">Equipment Packages</div>
+                            <p class="differentiator-text">I can source and supply grinders, tampers, scales, and machines at fair prices.</p>
+                        </div>
+                        <div class="differentiator">
+                            <div class="differentiator-title">Certified Professional</div>
+                            <p class="differentiator-text">Certified by the Specialty Coffee Association with ongoing professional development.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pull Quote -->
+        <section class="pull-quote">
+            <p class="quote-text"><span class="quote-mark">"</span>I come to you, train on your machine, and leave your team with everything they need.</p>
+        </section>
+
+        <!-- Credentials -->
+        <section class="credentials">
+            <div class="credentials-header">
+                <h3>Certifications & Credentials</h3>
+                <p style="font-size: 16px; color: #C8A96E;">Professional qualifications and ongoing training.</p>
+            </div>
+            <div class="credentials-grid">
+                <div class="credential-item">
+                    <div class="credential-icon">☕</div>
+                    <div class="credential-title">SCA Barista</div>
+                    <div class="credential-desc">Specialty Coffee Association Certified</div>
+                </div>
+                <div class="credential-item">
+                    <div class="credential-icon">📜</div>
+                    <div class="credential-title">Level 3 NVQ</div>
+                    <div class="credential-desc">Advanced Barista Qualification</div>
+                </div>
+                <div class="credential-item">
+                    <div class="credential-icon">🏆</div>
+                    <div class="credential-title">Competition Judge</div>
+                    <div class="credential-desc">Barista Championship Certified Judge</div>
+                </div>
+                <div class="credential-item">
+                    <div class="credential-icon">📚</div>
+                    <div class="credential-title">12+ Years</div>
+                    <div class="credential-desc">Specialty Coffee Industry</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SERVICES SECTION -->
+    <div id="services" class="content-section">
+        <!-- Services Header -->
+        <section class="services-header">
+            <h1>Training Sessions</h1>
+            <p class="services-intro">Four training packages designed for different café needs. Each delivered with calm expertise and attention to detail.</p>
+        </section>
+
+        <!-- Service Cards -->
+        <section class="services-grid">
+            <div class="service-card">
+                <div class="service-title">Individual Training</div>
+                <div class="service-duration">2–3 hours</div>
+                <p class="service-description">Perfect for a single barista who needs focused technique work or a refresh on best practices. One-on-one attention on your equipment.</p>
+                <ul class="service-bullets">
+                    <li>Espresso fundamentals</li>
+                    <li>Milk steaming technique</li>
+                    <li>Machine calibration</li>
+                    <li>One manual included</li>
+                </ul>
+                <button class="price-card-cta" onclick="alert('Contact Stephen O\'Byrne to book')">Inquire Now</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-badge">Best Value</div>
+                <div class="service-title">Group Training</div>
+                <div class="service-duration">2–3 hours, 4–6 people</div>
+                <p class="service-description">Bring your whole team together for coordinated, consistent training. The most popular option — saves time and cost while ensuring everyone learns the same systems.</p>
+                <ul class="service-bullets">
+                    <li>Team standardization</li>
+                    <li>Espresso & milk work</li>
+                    <li>Customer interaction tips</li>
+                    <li>Two training manuals</li>
+                    <li>Group dynamics work</li>
+                </ul>
+                <button class="price-card-cta" onclick="alert('Contact Stephen O\'Byrne to book')">Inquire Now</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-title">Half Day Intensive</div>
+                <div class="service-duration">3–4 hours</div>
+                <p class="service-description">Go deeper. Advanced technique, troubleshooting, and specialty drink prep. For cafés wanting to elevate their offering or train newer baristas thoroughly.</p>
+                <ul class="service-bullets">
+                    <li>Advanced espresso theory</li>
+                    <li>Grind selection & dialing</li>
+                    <li>Specialty milk drinks</li>
+                    <li>Equipment troubleshooting</li>
+                    <li>Two manuals per person</li>
+                </ul>
+                <button class="price-card-cta" onclick="alert('Contact Stephen O\'Byrne to book')">Inquire Now</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-badge">Comprehensive</div>
+                <div class="service-title">Full Day Session</div>
+                <div class="service-duration">5–7 hours</div>
+                <p class="service-description">Complete certification-ready training. Ideal for new cafés, seasonal hiring refreshes, or teams wanting comprehensive hands-on development and accreditation.</p>
+                <ul class="service-bullets">
+                    <li>Complete espresso training</li>
+                    <li>Milk technique mastery</li>
+                    <li>Coffee knowledge deep-dive</li>
+                    <li>Latte art fundamentals</li>
+                    <li>Certification & manuals</li>
+                    <li>Ongoing support access</li>
+                </ul>
+                <button class="price-card-cta" onclick="alert('Contact Stephen O\'Byrne to book')">Inquire Now</button>
+            </div>
+        </section>
+
+        <!-- Equipment Section -->
+        <section class="equipment-section">
+            <div class="equipment-header">
+                <h2>Equipment Packages Available</h2>
+                <p style="font-size: 16px; color: #C8A96E; margin-top: 16px;">I source quality espresso equipment — I'll customise based on your needs.</p>
+            </div>
+            <div class="equipment-grid">
+                <div class="equipment-card">
+                    <div class="equipment-title">Essentials Package</div>
+                    <p class="equipment-desc">Entry-level grinder, scale, tamper, dosing tools, and cleaning supplies for small cafés or serious home setups.</p>
+                </div>
+                <div class="equipment-card">
+                    <div class="equipment-title">Professional Package</div>
+                    <p class="equipment-desc">Commercial grinder, espresso machine setup, scales, and full tooling. Ready for daily café service.</p>
+                </div>
+                <div class="equipment-card">
+                    <div class="equipment-title">Premium Package</div>
+                    <p class="equipment-desc">Top-tier machine, commercial grinder, backup equipment, and training. Full café-ready setup with support.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- What's Included -->
+        <section class="included-section">
+            <div class="included-header">
+                <h2>What's Always Included</h2>
+                <p style="font-size: 16px; color: #C8A96E; margin-top: 16px;">Every training package comes with these essentials.</p>
+            </div>
+            <div class="included-grid">
+                <div class="included-item">
+                    <div class="included-title">Training Manuals</div>
+                    <p class="included-text">Professional-grade reference guides documenting everything covered in your session. Keep them on the bar.</p>
+                </div>
+                <div class="included-item">
+                    <div class="included-title">Certificate</div>
+                    <p class="included-text">Recognized barista training completion certificate for each participant. Boost team credentials.</p>
+                </div>
+                <div class="included-item">
+                    <div class="included-title">On-Site Delivery</div>
+                    <p class="included-text">Training happens at your café on your equipment. No travel required from you. I handle setup and cleanup.</p>
+                </div>
+                <div class="included-item">
+                    <div class="included-title">Machine Calibration</div>
+                    <p class="included-text">I'll calibrate your espresso machine and grinder during the session. Leaves you with dialed-in equipment.</p>
+                </div>
+                <div class="included-item">
+                    <div class="included-title">Technique Documentation</div>
+                    <p class="included-text">Written notes on your specific machine's quirks, settings, and the best techniques for your workflow.</p>
+                </div>
+                <div class="included-item">
+                    <div class="included-title">Follow-Up Support</div>
+                    <p class="included-text">Questions after training? Email or phone. I'm here to help your team retain what they learned.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq-section">
+            <div class="faq-header">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How long does training typically take?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Individual training is 2–3 hours. Group sessions are 2–3 hours for 4–6 people. Half-day is 3–4 hours, and full-day is 5–7 hours. I'm flexible and can adjust based on your team's needs and your café's schedule.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do you train on every machine type?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>I train on most commercial and semi-commercial machines. Single-group, multi-group, heat exchangers, doubles boilers—you name it. If it's espresso-focused, I've trained on it. Let me know your setup and I'll confirm compatibility.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What if my team can't all attend at once?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No problem. I can split training across two sessions, schedule training for different shifts, or do individual sessions spread over a few weeks. Flexibility is built in — let's find what works for your café's rhythm.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do you provide the coffee for training?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No. I use your coffee and your beans. This ensures training is perfectly calibrated to your grinder, your espresso machine, and your workflow. Everything you learn is directly applicable.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can you help with equipment sourcing and setup?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. I work with quality suppliers and can source grinders, machines, scales, and accessories. I'll help you pick what's right for your café, get it installed, and train your team on it all at once.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What areas of Ireland do you cover?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nationwide. I'm based in Waterford but travel across Ireland regularly. Travel time may be factored into pricing for locations very far afield, but I'll work with you on arrangements.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <h2>Ready to Talk?</h2>
+            <div class="cta-content">
+                <div class="cta-item">
+                    <div class="cta-label">Phone</div>
+                    <div class="cta-value"><a href="tel:085-153-1556">085-153-1556</a></div>
+                </div>
+                <div class="cta-item">
+                    <div class="cta-label">Email</div>
+                    <div class="cta-value"><a href="mailto:stephen@baristatraining.ie">stephen@baristatraining.ie</a></div>
+                </div>
+            </div>
+            <button class="cta-button">Get in Touch</button>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+    <div class="footer-bean-border">
+        <div class="footer-bean" style="color: #8AAE97;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="footer-bean" style="color: #C8A96E;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="footer-bean" style="color: #8AAE97;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="footer-bean" style="color: #C8A96E;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="footer-bean" style="color: #8AAE97;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="footer-bean" style="color: #C8A96E;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="footer-bean" style="color: #8AAE97;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="footer-bean" style="color: #C8A96E;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="footer-bean" style="color: #8AAE97;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div class="footer-bean" style="color: #C8A96E;">
+            <svg viewBox="0 0 30 40"><ellipse cx="15" cy="20" rx="12" ry="18" fill="currentColor"/><path d="M15 4 C12 12, 12 28, 15 36" stroke="rgba(10,10,10,0.4)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+    </div>
+
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Stephen O'Byrne</h4>
+                <p>Certified barista trainer bringing calm expertise and proven systems to cafés across Ireland. On-site training. Professional results.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a onclick="showSection('home')">Home</a>
+                <a onclick="showSection('about')">About Me</a>
+                <a onclick="showSection('services')">Services</a>
+                <a href="mailto:stephen@baristatraining.ie">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Phone: <a href="tel:085-153-1556">085-153-1556</a></p>
+                <p>Email: <a href="mailto:stephen@baristatraining.ie">stephen@baristatraining.ie</a></p>
+                <p>Based in Waterford, Ireland.<br>Serving nationwide.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Stephen O'Byrne Barista Training. All rights reserved. | baristatraining.ie</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+            }
+
+            // Update nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const toggle = element.querySelector('.faq-toggle');
+
+            answer.classList.toggle('open');
+            toggle.classList.toggle('open');
+        }
+    </script>
 </body>
 </html>
