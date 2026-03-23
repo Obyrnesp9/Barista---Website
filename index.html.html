@@ -1,5 +1,3 @@
-<!-- START COPY -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,50 +7,69 @@
 
 <link rel="icon" href="Favicon_V1.svg">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0A0A0A;
-    color: #F2F0EB;
-    text-align: center;
+    margin:0;
+    background:#0A0A0A;
+    color:#F2F0EB;
+    font-family:'Sora',sans-serif;
 }
 
-nav {
-    padding: 20px;
-    border-bottom: 1px solid #333;
+/* NAV */
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 30px;
+    border-bottom:1px solid #222;
 }
 
-nav a {
-    margin: 0 15px;
-    cursor: pointer;
-    text-decoration: none;
-    color: #F2F0EB;
+nav img{height:60px;cursor:pointer;}
+
+.nav-links a{
+    margin-left:20px;
+    cursor:pointer;
+    text-transform:uppercase;
+    font-size:12px;
 }
 
-.hero {
-    padding: 100px 20px;
+/* HERO */
+.hero{
+    text-align:center;
+    padding:100px 20px;
 }
 
-.hero h1 {
-    font-size: 48px;
+.hero h1{
+    font-size:48px;
 }
 
-.accent {
-    color: #8AAE97;
+.accent{color:#8AAE97;}
+
+.cta-button{
+    margin-top:30px;
+    padding:15px 30px;
+    background:#8AAE97;
+    border:none;
+    cursor:pointer;
 }
 
-.cta {
-    margin-top: 30px;
-    padding: 15px 30px;
-    background: #8AAE97;
-    border: none;
-    cursor: pointer;
+/* SECTIONS */
+.content-section{display:none;}
+.content-section.active{display:block;}
+
+/* SIMPLE CARDS */
+.section{
+    padding:60px 20px;
+    text-align:center;
 }
 
-img {
-    max-width: 300px;
-    margin-top: 40px;
+img{
+    max-width:300px;
+    margin-top:20px;
 }
 </style>
 </head>
@@ -60,42 +77,59 @@ img {
 <body>
 
 <nav>
-    <a onclick="show('home')">Home</a>
-    <a onclick="show('about')">About</a>
-    <a onclick="show('services')">Services</a>
+<img src="Logo_ClassicEmblem_Transparent.png" onclick="showSection('home')">
+<div class="nav-links">
+<a onclick="showSection('home')">Home</a>
+<a onclick="showSection('about')">About</a>
+<a onclick="showSection('services')">Services</a>
+</div>
 </nav>
 
-<div id="home" class="section">
-    <div class="hero">
-        <h1>
-            Great equipment does not<br>
-            <span class="accent">guarantee great coffee.</span>
-        </h1>
-        <p>Certified barista training across Ireland.</p>
-        <button class="cta">Book a Session</button>
+<!-- HOME -->
+<div id="home" class="content-section active">
+<section class="hero">
+<h1>
+Great equipment does not<br>
+<span class="accent">guarantee great coffee.</span>
+</h1>
 
-        <img src="Stephens headshot.jpeg" alt="Stephen">
-    </div>
+<p>Certified barista training across Ireland</p>
+
+<button class="cta-button" onclick="showSection('services')">
+Book a Session
+</button>
+
+<br>
+<img src="Stephens headshot.jpeg">
+</section>
 </div>
 
-<div id="about" class="section" style="display:none;">
-    <h2>About Stephen</h2>
-    <p>Certified Barista Trainer with 20 years experience.</p>
+<!-- ABOUT -->
+<div id="about" class="content-section">
+<section class="section">
+<h2>About Stephen</h2>
+<p>Certified Barista Trainer with 20+ years experience working with cafés across Ireland.</p>
+</section>
 </div>
 
-<div id="services" class="section" style="display:none;">
-    <h2>Services</h2>
-    <p>Training packages available for individuals and teams.</p>
+<!-- SERVICES -->
+<div id="services" class="content-section">
+<section class="section">
+<h2>Services</h2>
+<p>On-site barista training tailored to your business.</p>
+</section>
 </div>
 
 <script>
-function show(id) {
-    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-    document.getElementById(id).style.display = 'block';
+function showSection(sectionId){
+    const sections=document.querySelectorAll('.content-section');
+    sections.forEach(s=>s.classList.remove('active'));
+
+    document.getElementById(sectionId).classList.add('active');
+
+    window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
 
 </body>
 </html>
-
-<!-- END COPY -->
